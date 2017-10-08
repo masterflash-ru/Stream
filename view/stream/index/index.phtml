@@ -1,0 +1,39 @@
+<?php
+foreach ($this->paginator as $item)
+{
+	$date=$this->dateFormat(
+						new DateTime($item->getDate_public()),
+						IntlDateFormatter::MEDIUM, // date
+						IntlDateFormatter::NONE, // time
+						$item->getLocale()
+							);
+	$url=$this->url("stream_detal",["url"=>$item->getUrl(),"stream"=>$item->getCategory()]);
+?>
+<div class="news_item">
+	        <div class="news_anons">
+            <h2><?=$item->getCaption();?></h2>
+            <div class="news_date"><?=$date;?></div>
+            	<a href="<?=$url;?>"><img src="<?=$this->ImageStorage($item->getCategory(),$item->getId(),"anons");?>" alt="<?=$item->getAlt();?>"  class="news_title_foto" /></a>
+                <?=$item->getAnons();?>
+                <div class="readmore"><a href="<?=$url;?>">Читать полностью &rarr;</a></div>
+    	     </div>
+      <div class="clearfloat"></div>
+</div>
+<?php 
+		}
+
+echo $this->paginationControl(
+   					 $this->paginator,
+   					 'Sliding',
+   					 'pagination_control.phtml',
+   					  [
+					  	"route_name_page"=>"stream",
+                        "route_name_default"=>"stream",
+						"url_parameters"=>["stream"=>$item->getCategory()]
+                      ]
+) 
+
+
+
+?>
+<div class="clearfloat"></div>

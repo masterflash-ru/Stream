@@ -1,0 +1,24 @@
+<div class="last_stream">
+ <?php
+foreach ($this->items as $item)
+	{
+ 	$date=$this->dateFormat(
+						new DateTime($item->getDate_public()),
+						IntlDateFormatter::MEDIUM, // date
+						IntlDateFormatter::NONE, // time
+						$item->getLocale()
+							);
+	$url=$this->url("stream_detal",["url"=>$item->getUrl(),"stream"=>$item->getCategory()]);
+
+ ?>
+    <div class="items">
+        <div class="cap"><?=$item->getCaption();?></div>
+        <div class="date"><?=$date;?></div>
+        <a href="<?=$url;?>"><img src="<?=$this->ImageStorage($item->getCategory(),$item->getId(),"anons");?>" alt="" /></a>
+        <p><?=$item->getAnons();?></p>
+    </div>
+
+<?php
+	}
+?>
+</div>

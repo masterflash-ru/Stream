@@ -8,12 +8,13 @@ foreach ($this->paginator as $item)
 						$item->getLocale()
 							);
 	$url=$this->url("stream_detal",["url"=>$item->getUrl(),"stream"=>$item->getCategory()]);
+	$category=$item->getCategory();
 ?>
 <div class="news_item">
 	        <div class="news_anons">
             <h2><?=$item->getCaption();?></h2>
             <div class="news_date"><?=$date;?></div>
-            	<a href="<?=$url;?>"><img src="<?=$this->ImageStorage($item->getCategory(),$item->getId(),"anons");?>" alt="<?=$item->getAlt();?>"  class="news_title_foto" /></a>
+            	<a href="<?=$url;?>"><img src="<?=$this->ImageStorage($category,$item->getId(),"anons");?>" alt="<?=$item->getAlt();?>"  class="news_title_foto" /></a>
                 <?=$item->getAnons();?>
                 <div class="readmore"><a href="<?=$url;?>">Читать полностью &rarr;</a></div>
     	     </div>
@@ -21,6 +22,8 @@ foreach ($this->paginator as $item)
 </div>
 <?php 
 		}
+//генерирует СЕО для имени $category
+$this->seolist($category,"ru_RU");
 
 echo $this->paginationControl(
    					 $this->paginator,

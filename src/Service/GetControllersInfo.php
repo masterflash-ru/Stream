@@ -29,7 +29,7 @@ class GetControllersInfo
 	{
 		//админка стандартная
 		if ($this->options["name"]) {return [];}
-		
+		if (!isset($this->options["locale"])) {$this->options["locale"]=$this->config["locale_default"];}
 		//для сайта
 		if (!isset($this->config['streams']) || !is_array($this->config['streams']))
 			{
@@ -42,26 +42,20 @@ class GetControllersInfo
 
 		foreach ($this->config['streams'] as $stream_name=>$stream_info)
 			{
-				foreach ($this->config["locale_enable_list"] as $locale)
-					{//цикл по локалям
-						if ($locale==$this->config["locale_default"]) {$locale=NULL;}
-						$url = $this->Router->assemble(["stream"=>$stream_name,"locale"=>$locale], ['name' => 'stream']);
+				$locale=$this->options["locale"];
+				if ($locale==$this->config["locale_default"]) {$locale=NULL;}
+				$url = $this->Router->assemble(["stream"=>$stream_name,"locale"=>$locale], ['name' => 'stream']);
 						$mvc=[
 								"route"=>"stream",
 								'params'=>["stream"=>$stream_name,"locale"=>$locale]
 							];
-						if(empty($locale)) {$locale=" локаль по умолчанию - ".$this->config["locale_default"];}
-						$rez["name"][]=$stream_info['description']." - ".$locale;
-						$rez["mvc"][]= serialize($mvc);
-						$rez["url"][]=$url;
-					}
-				
+				if(empty($locale)) {$locale=" локаль по умолчанию - ".$this->config["locale_default"];}
+				$rez["name"][]=$stream_info['description']." - ".$locale;
+				$rez["mvc"][]= serialize($mvc);
+				$rez["url"][]=$url;
 			}
 		$info["stream"]["urls"]=$rez;
 		return $info;
 	}
 	
 }
-
-
-

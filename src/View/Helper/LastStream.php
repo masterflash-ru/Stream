@@ -31,9 +31,9 @@ public function __invoke($stream_name,$item_count=3,$locale="ru_RU")
 	$this->StreamLib->SetStreamName($stream_name);
 	$this->StreamLib->SetLocale($locale);
 	$items=$this->StreamLib->LoadLastList($item_count);
-	
+
 	$view=$this->getView();
-	$vm=new ViewModel(["items"=>$items]);
+	$vm=new ViewModel(["items"=>$items,'locale'=>$locale]);
 	$vm->setTemplate("laststream");
 	
 	return $view->render($vm);

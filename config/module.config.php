@@ -9,8 +9,10 @@ namespace Stream;
 
 use Zend\Router\Http\Segment;
 use Zend\Router\Http\Literal;
-
-
+/*
+для других языков создайте новые маршруты по аналогии с ru_RU 
+в имени маршрута обязательно должна стоять локаль
+*/
 return [
 
 	//маршруты
@@ -18,25 +20,25 @@ return [
         'routes' => [
 		
             //список новостей
-			'stream' => [
+			'stream_ru_RU' => [
                 'type' => Segment::class,
                 'options' => [
                     'route'    => '/:stream[/page/:page]',
 					'constraints' => [
-                               			 //'locale' => '[a-zA-Z0-9_\-]+',
 										 'stream' => 'news|article',
 										 'page' => '\d+',
                            			 ],
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
-						'page'=>1
+						'page'=>1,
+						'locale'=>'ru_RU'
                     ],
                 ],
 			],
 			
 			//маршрут для подробности
-			'stream_detal' => [
+			'stream_detal_ru_RU' => [
 					'type' => Segment::class,
 					'options' => [
 						'route'    => '/:stream/:url',
@@ -47,6 +49,7 @@ return [
 						'defaults' => [
 							'controller' => Controller\IndexController::class,
 							'action'     => 'detal',
+							'locale'=>'ru_RU'
 						],
 					],
 			],				

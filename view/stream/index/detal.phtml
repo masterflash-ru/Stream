@@ -15,5 +15,5 @@ $this->headMeta()->appendName('description', $item->GetDescription() );
 <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
 <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,viber,whatsapp" data-counter=""></div>
 <br />
-<a href="<?=$this->url("stream",["stream"=>$item->getCategory()]);?>">Перейти к списку</a>
+<a href="<?=$this->url("stream_".$this->locale,["stream"=>$item->getCategory()]);?>">Перейти к списку</a>
 </div>

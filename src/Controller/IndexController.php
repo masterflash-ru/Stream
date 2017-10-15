@@ -30,17 +30,17 @@ class IndexController extends AbstractActionController
     {
 		$page=(int)$this->params('page',0);
 		$stream=$this->params('stream',NULL);
-		$locale=$this->params('locale',NULL);
+		$locale=$this->params('locale',$this->config["locale_default"]);
 
 	try
 	{
-		$this->checkLocale();		
 		$this->stream_service->SetLocale($locale);					//новая локаль
 		$this->stream_service->SetPage($page);					//номер страницы
 		$this->stream_service->SetStreamName($stream);
 		$paginator=$this->stream_service->LoadList();				//список элементов
 
-		return new ViewModel(["paginator"=>$paginator]);
+		
+		return new ViewModel(["paginator"=>$paginator,"locale"=>$locale]);
 	}
 	catch (\Exception $e) 
 		{
@@ -59,39 +59,25 @@ class IndexController extends AbstractActionController
 		$stream=$this->params('stream',NULL);
 		$locale=$this->params('locale',NULL);
 		$url=$this->params('url',NULL);
-	//try
-//	{
-		$this->checkLocale();
+	try
+	{
+
 		$this->stream_service->SetLocale($locale);					//новая локаль
 		$this->stream_service->SetPage($page);					//номер страницы
 		$this->stream_service->SetStreamName($stream);
 		$item=$this->stream_service->LoadDetal($url);				//список элементов
 
-		return new ViewModel(["item"=>$item]);
-//	}
-//	catch (\Exception $e) 
-//		{
+		return new ViewModel(["item"=>$item,"locale"=>$locale]);
+	}
+	catch (\Exception $e) 
+		{
 			//любое исключение - 404
 			$this->getResponse()->setStatusCode(404);
-	//	}
+		}
 
     }
 
 
-/*
-проверяет допустимость локали, что бы не было дубликатов страниц
-если есть дуюликат, то исключение
-*/
-protected function checkLocale()
-{
-	$locale=$this->params('locale',NULL);
-	//получим дефолтную локаль, что бы проверить передана ли она в URL
-	//это нужно для исключения дубляжей URL
-	$default_locale=$this->stream_service->GetDefaultLocale();	//разрешенные локали
-		
-	if ($locale && $this->stream_service->isMultiLocale() && $default_locale==$locale) {throw new Exception("Запрещено использовать в URL локаль, которая установлена по умолчанию, для исключения дубляжей URL");}
-	if ($locale && !$this->stream_service->isMultiLocale()) {throw new Exception("Запрещено использовать в URL локаль для моноязычного сайта");}
-}
 
 
 }

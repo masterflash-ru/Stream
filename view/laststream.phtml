@@ -8,7 +8,7 @@ foreach ($this->items as $item)
 						IntlDateFormatter::NONE, // time
 						$item->getLocale()
 							);
-	$url=$this->url("stream_detal",["url"=>$item->getUrl(),"stream"=>$item->getCategory()]);
+	$url=$this->url("stream_detal_".$this->locale,["url"=>$item->getUrl(),"stream"=>$item->getCategory()]);
 
  ?>
     <div class="items">

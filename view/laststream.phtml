@@ -16,7 +16,9 @@ foreach ($this->items as $item)
         <div class="date"><?=$date;?></div>
         <a href="<?=$url;?>"><img src="<?=$this->ImageStorage($item->getCategory(),$item->getId(),"anons");?>" alt="" /></a>
         <p><?=$item->getAnons();?></p>
+
     </div>
+	<div class="clearfloat"></div>
 
 <?php
 	}

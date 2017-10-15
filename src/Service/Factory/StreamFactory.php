@@ -15,7 +15,7 @@ class StreamFactory implements FactoryInterface
 public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
 		 $connection=$container->get('ADO\Connection');
-		 $cache = $container->get('FilesystemCache');
+		 $cache = $container->get('DefaultSystemCache');
 		 $config = $container->get('Config');
         
         return new Stream($connection, $cache,$config);

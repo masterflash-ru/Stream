@@ -10,7 +10,7 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\View\Model\ViewModel;
 
 /**
- * помощник - генератор меню админки
+ * помощник - вывода последних новостей/статей
  */
 class LastStream extends AbstractHelper 
 {

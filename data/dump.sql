@@ -18,7 +18,7 @@
 delete from design_tables where table_name='stream';
 delete from design_tables_text_interfase where interface_name='stream';
 
-INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_name`, `caption_style`, `row_type`, `col_por`, `pole_spisok_sql`, `pole_global_const`, `pole_prop`, `pole_type`, `pole_style`, `pole_name`, `default_sql`, `functions_befo`, `functions_after`, `functions_befo_out`, `functions_befo_del`, `properties`, `value`, `validator`, `sort_item_flag`, `col_function_array`) VALUES 
+INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_name`, `caption_style`, `row_type`, `col_por`, `pole_spisok_sql`, `pole_global_const`, `pole_prop`, `pole_type`, `pole_style`, `pole_name`, `default_sql`, `functions_befo`, `functions_after`, `functions_befo_out`, `functions_befo_del`, `properties`, `value`, `validator`, `sort_item_flag`, `col_function_array`) VALUES INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_name`, `caption_style`, `row_type`, `col_por`, `pole_spisok_sql`, `pole_global_const`, `pole_prop`, `pole_type`, `pole_style`, `pole_name`, `default_sql`, `functions_befo`, `functions_after`, `functions_befo_out`, `functions_befo_del`, `properties`, `value`, `validator`, `sort_item_flag`, `col_function_array`) VALUES 
   ('stream_detal', 'stream', 0, 'description', '', 3, 0, '', '', 'cols=100 rows=5', '3', '', 'description', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'anons', '', 2, 5, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'anons', '', 3, 0, '', '', 'cols=100 rows=6', '3', '', 'anons', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
@@ -35,7 +35,7 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream_detal', 'stream', 0, 'keywords', '', 2, 16, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'keywords', '', 3, 0, '', '', 'cols=100 rows=5', '3', '', 'keywords', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'description', '', 2, 17, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
-  ('stream', 'stream', 0, 'foto', '', 0, 0, 'select * from stream where locale=''$pole_dop0''  and category=''$pole_dop1''  and public=''$pole_dop2''', '', '1,1,0,0', 'foto', '0', 'id', 'delete from stream where id=$id', '', '', '', '', '', 0x613A323A7B733A32343A22666F726D5F656C656D656E74735F6E65775F7265636F7264223B733A313A2230223B733A32343A22666F726D5F656C656D656E74735F6A6D705F7265636F7264223B733A313A2230223B7D, 'stream', 1, ''),
+  ('stream', 'stream', 0, 'foto', '', 0, 0, 'select * from stream where locale=''$pole_dop0''  and category=''$pole_dop1''  and public=''$pole_dop2''', '', '1,1,0,0', 'foto', '0', 'id', 'delete from stream where id=$id and id>10000', '', '', '', '', '', 0x613A323A7B733A32343A22666F726D5F656C656D656E74735F6E65775F7265636F7264223B733A313A2230223B733A32343A22666F726D5F656C656D656E74735F6A6D705F7265636F7264223B733A313A2230223B7D, 'stream', 1, ''),
   ('stream', 'stream', 0, '', '', 1, 0, '', '', 'onChange=this.form.submit()', '4', '', '', '', '', '', '\\Stream\\Lib\\Func\\GetLocales', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', '', 0, ''),
   ('stream', 'stream', 0, '', '', 1, 0, '', '', 'onChange=this.form.submit()', '4', '', '', '', '', '', '\\Stream\\Lib\\Func\\GetStreamList', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', '', 0, ''),
   ('stream', 'stream', 0, '', '', 1, 0, 'DROP TABLE IF EXISTS sp;create temporary table sp (id int(11), name char(50)) ENGINE=MEMORY DEFAULT CHARSET=utf8; insert into sp (id,name) values (1, \"Опубликованные\"),(0,\"Не опубликованные или на модерации\"),(-1,\"Черновики\"); select * from sp', '', 'onChange=this.form.submit()', '4', '', '', 'select * from sp', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', '', 0, ''),
@@ -53,8 +53,8 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream', 'stream', 0, 'category', '', 3, 0, '', '', '', '0', '', 'pole_dop1', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
   ('stream', 'stream', 0, 'public', '', 2, 9, '', '', '', '0', '', 'pole_dop2', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
   ('stream', 'stream', 0, 'public', '', 3, 0, '', '', '', '0', '', 'pole_dop2', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
-  ('stream', 'stream', 0, 'foto', '', 2, 7, '', '', '', '1', '', 'foto', '', '', 'Stream\\Lib\\Func\\ImgLib', '', 'Stream\\Lib\\Func\\ImgLib', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"1\";}', '', 'N;', 0, 'N;'),
-  ('stream', 'stream', 0, 'foto', '', 3, 0, '', '[\"images\"][\"images_data_folder\"],[\"images\"][\"foto_storage\"][''public_folder_url'']', ',', '30', '', 'foto', '', '', 'Stream\\Lib\\Func\\ImgLib', 'Stream\\Lib\\Func\\ImgLib', 'Stream\\Lib\\Func\\ImgLib', 'a:12:{i:0;s:1:\"0\";i:1;s:1:\"1\";i:2;s:0:\"\";i:3;s:0:\"\";i:4;s:0:\"\";i:5;s:1:\"n\";i:6;s:0:\"\";i:7;s:0:\"\";i:8;s:0:\"\";i:9;s:1:\"0\";i:10;s:1:\"0\";i:11;s:1:\"0\";}', '', 'N;', 0, 'N;'),
+  ('stream', 'stream', 0, 'foto', '', 2, 7, '', '', '', '1', '', 'foto', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"1\";}', '', 'N;', 0, 'N;'),
+  ('stream', 'stream', 0, 'foto', '', 3, 0, '', '', '', '32', '', 'foto', '', 'Stream\\Lib\\Func\\InImgLib', '', 'Stream\\Lib\\Func\\OutImgLib', 'Stream\\Lib\\Func\\InImgLib', 'a:3:{i:0;s:0:\"\";i:1;s:0:\"\";i:2;s:0:\"\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, '', '', 0, 1, 'select * from stream where id=$get_interface_input', '', '0,0,0,0', '', '0', 'id', '', '', '', '', '', '', 0x613A323A7B733A32343A22666F726D5F656C656D656E74735F6E65775F7265636F7264223B733A313A2230223B733A32343A22666F726D5F656C656D656E74735F6A6D705F7265636F7264223B733A313A2230223B7D, 'stream', 1, ''),
   ('stream_detal', 'stream', 0, 'date_public', '', 2, 1, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'date_public', '', 3, 0, '', '', ',', '27', '', 'date_public', '', '', '', '', '', 'a:4:{i:0;s:1:\"0\";i:1;s:1:\"0\";i:2;s:1:\"2\";i:3;s:1:\"2\";}', '', 'N;', 0, 'N;'),
@@ -64,6 +64,8 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream_detal', 'stream', 0, 'url', '', 3, 0, '', '', 'size=100', '2', '', 'url', '', '', '\\Stream\\Lib\\Func\\CreateUrl', '', '', 'a:1:{i:0;s:4:\"Text\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, '1', '', 2, 36, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, '1', '', 3, 0, '', '', '', '19', '', 'save', '', '', '', '', '', 'a:2:{i:0;s:1:\"1\";i:1;s:18:\"Сохранить\";}', '', 'N;', 0, 'N;');
+
+
 
 
 INSERT INTO `design_tables_text_interfase` (`language`, `table_type`, `interface_name`, `item_name`, `text`) VALUES 

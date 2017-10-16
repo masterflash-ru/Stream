@@ -31,7 +31,7 @@ echo $this->paginationControl(
    					 'pagination_control.phtml',
    					  [
 					  	"route_name_page"=>"stream_".$this->locale,
-                        "route_name_default"=>"stream_",
+                        "route_name_default"=>"stream_".$this->locale,
 						"url_parameters"=>["stream"=>$item->getCategory()]
                       ]
 ) 

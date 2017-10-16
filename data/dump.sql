@@ -18,7 +18,7 @@
 delete from design_tables where table_name='stream';
 delete from design_tables_text_interfase where interface_name='stream';
 
-INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_name`, `caption_style`, `row_type`, `col_por`, `pole_spisok_sql`, `pole_global_const`, `pole_prop`, `pole_type`, `pole_style`, `pole_name`, `default_sql`, `functions_befo`, `functions_after`, `functions_befo_out`, `functions_befo_del`, `properties`, `value`, `validator`, `sort_item_flag`, `col_function_array`) VALUES INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_name`, `caption_style`, `row_type`, `col_por`, `pole_spisok_sql`, `pole_global_const`, `pole_prop`, `pole_type`, `pole_style`, `pole_name`, `default_sql`, `functions_befo`, `functions_after`, `functions_befo_out`, `functions_befo_del`, `properties`, `value`, `validator`, `sort_item_flag`, `col_function_array`) VALUES 
+INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_name`, `caption_style`, `row_type`, `col_por`, `pole_spisok_sql`, `pole_global_const`, `pole_prop`, `pole_type`, `pole_style`, `pole_name`, `default_sql`, `functions_befo`, `functions_after`, `functions_befo_out`, `functions_befo_del`, `properties`, `value`, `validator`, `sort_item_flag`, `col_function_array`) VALUES 
   ('stream_detal', 'stream', 0, 'description', '', 3, 0, '', '', 'cols=100 rows=5', '3', '', 'description', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'anons', '', 2, 5, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'anons', '', 3, 0, '', '', 'cols=100 rows=6', '3', '', 'anons', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
@@ -64,6 +64,8 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream_detal', 'stream', 0, 'url', '', 3, 0, '', '', 'size=100', '2', '', 'url', '', '', '\\Stream\\Lib\\Func\\CreateUrl', '', '', 'a:1:{i:0;s:4:\"Text\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, '1', '', 2, 36, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, '1', '', 3, 0, '', '', '', '19', '', 'save', '', '', '', '', '', 'a:2:{i:0;s:1:\"1\";i:1;s:18:\"Сохранить\";}', '', 'N;', 0, 'N;');
+
+
 
 
 

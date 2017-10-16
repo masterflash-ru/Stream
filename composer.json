@@ -14,9 +14,9 @@
         "php": "^7.0",
         "zendframework/zend-cache": "^2.7",
         "zendframework/zend-paginator": "^2.7",
-        "masterflash-ru/ado": "^1.0",
-        "masterflash-ru/images": "^1.0",
-        "masterflash-ru/seolist": "^1.0"
+        "masterflash-ru/ado": "*",
+        "masterflash-ru/images": "*",
+        "masterflash-ru/seolist": "*"
     },
     "autoload": {
         "psr-4": {

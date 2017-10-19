@@ -52,7 +52,7 @@ public function LoadList()
 			locale='".$this->locale."' and 
 			url>'' and 
 			public =".self::PUBLIC."
-				order by date_public",$this->connection);
+				order by date_public desc",$this->connection);
 	
 	$items=$rs->FetchEntityAll(Item::class);
 	$paginator = new Paginator(new Adapter\ArrayAdapter($items));
@@ -122,7 +122,7 @@ public function LoadLastList($limit=3)
 									locale='".$this->locale."' and 
 									url>'' and 
 									public =".self::PUBLIC."
-										order by date_public",$this->connection);
+										order by date_public  desc limit $limit",$this->connection);
 				$items=$rs->FetchEntityAll(Item::class);
 				//сохраним в кеш
 				$this->cache->setItem($key, $items);

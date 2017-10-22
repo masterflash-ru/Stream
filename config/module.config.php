@@ -16,7 +16,7 @@ use Zend\Router\Http\Literal;
 return [
 
 	//маршруты как примеры
-    /*'router' => [
+    'router' => [
         'routes' => [
 		
             //список новостей
@@ -55,7 +55,7 @@ return [
 			],				
 
 	    ],
-    ],*/
+    ],
 	
 	//контроллеры
     'controllers' => [

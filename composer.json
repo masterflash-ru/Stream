@@ -15,7 +15,7 @@
         "zendframework/zend-cache": "^2.7",
         "zendframework/zend-paginator": "^2.7",
         "masterflash-ru/ado": "*",
-        "masterflash-ru/images": "*",
+        "masterflash-ru/storage": "*",
         "masterflash-ru/seolist": "*"
     },
     "autoload": {

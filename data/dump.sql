@@ -83,7 +83,20 @@ INSERT INTO `design_tables_text_interfase` (`language`, `table_type`, `interface
   ('ru_RU', 0, 'stream', 'caption_col_foto', 'Фото'),
   ('ru_RU', 0, 'stream', 'caption_col_public', 'Статус');
 
-
+INSERT INTO `design_tables_text_interfase` (`language`, `table_type`, `interface_name`, `item_name`, `text`) VALUES 
+  ('ru_RU', 0, 'stream_detal', 'caption0', 'Подробности'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_date_public', 'дата публикации'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_full', 'Подробно'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_caption', 'Заголовок'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_alt', 'Подпись фото'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_anons', 'Анонс'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_url', 'URL - транслит заголовка - автомат'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_public', 'Публиковать'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_title', 'TITLE'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_keywords', 'KEYWORDS'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_description', 'DESCRIPTION'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_counter', 'просмотров'),
+  ('ru_RU', 0, 'stream_detal', 'caption_col_1', 'Операция');
 
 DROP TABLE IF EXISTS `stream`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

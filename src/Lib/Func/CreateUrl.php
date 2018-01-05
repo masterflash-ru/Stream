@@ -10,7 +10,7 @@ public function __invoke ($obj,$infa,$struct0,$struct2,$tab_name,$const,$row_ite
 {
 if (empty($infa)) 
 	{
-		$infa=preg_replace('/[^0-9a-zA-Z_а-яА-Я\- ]/iu', '',trim($_POST['caption'][$b]));
+		$infa=preg_replace('/[^0-9a-zA-Z_а-яА-Я\-]/iu', '',trim($_POST['caption'][$b]));
 		$infa=$this->translit($infa);//переводим
 		
 	}

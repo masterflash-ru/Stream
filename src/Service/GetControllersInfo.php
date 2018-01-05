@@ -8,7 +8,7 @@ namespace Stream\Service;
 возвращаются и ссылки, и спец массив с данными MVC
 
 */
-
+use Exception;
 
 class GetControllersInfo 
 {
@@ -33,7 +33,7 @@ class GetControllersInfo
 		//для сайта
 		if (!isset($this->config['streams']) || !is_array($this->config['streams']))
 			{
-				throw new \Exception("Секция конфига 'streams' не найдена или она не верного формата");
+				throw new Exception("Секция конфига 'streams' не найдена или она не верного формата");
 			}
 		$info["stream"]["description"]="Лента информации";
 		$rez['name']=[];

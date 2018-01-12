@@ -19,7 +19,7 @@ return [
     'router' => [
         'routes' => [
 		
-            //список новостей
+           /* //список новостей
 			'stream_ru_RU' => [
                 'type' => Segment::class,
                 'options' => [
@@ -52,7 +52,7 @@ return [
 							'locale'=>'ru_RU'
 						],
 					],
-			],				
+			],*/				
 
 	    ],
     ],

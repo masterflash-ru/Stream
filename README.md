@@ -1,5 +1,5 @@
 модуль работы с лентами статей, новостей....
-После установки следует загрузить в базу дамп из папки data
+После установки следует загрузить в базу дамп из папки data, скопируйте стили css из папки public в файл стилей приложения
 
 
 Установка
@@ -7,6 +7,9 @@ composer require masterflash-ru/stream
 
 Добавьте в конфиг приложения:
 ```php
+//определение вначале файла
+use Stream\Controller\IndexController as Stream;
+
 'streams'=>[
 			'news'=>[                         /*раздел ленты*/
 				'description'=>'Новости',        /*Имя ленты*/
@@ -91,3 +94,42 @@ composer require masterflash-ru/stream
         ],
     ],
 ```
+Добавьте в конфиг приложения маршрут:
+```php
+			//маршрут для подробности
+			'stream_detal_ru_RU' => [
+					'type' => Segment::class,
+					'options' => [
+						'route'    => '/:stream/:url',
+						'constraints' => [
+											 'url' => '[a-zA-Z0-9_\-]+',
+											 'stream' => 'news|articles',
+										 ],
+						'defaults' => [
+							'controller' => Stream::class,
+							'action'     => 'detal',
+							'locale'=>'ru_RU'
+						],
+					],
+			],				
+			
+            //список новостей
+			'stream_ru_RU' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/:stream[/page/:page]',
+					'constraints' => [
+										 'stream' => 'news|articles',
+										 'page' => '\d+',
+                           			 ],
+                    'defaults' => [
+                        'controller' => Stream::class,
+                        'action'     => 'index',
+						'page'=>1,
+						'locale'=>'ru_RU'
+                    ],
+                ],
+			],
+
+```
+Компонент имеет 2 варианта вывода номеров страниц, в стиле bootstrap (по умолчанию), и в старом формате, файл pagination_control-old.phtml

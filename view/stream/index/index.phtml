@@ -1,5 +1,6 @@
 <?php
 $category="";
+
 foreach ($this->paginator as $item)
 {
 	$date=$this->dateFormat(
@@ -29,8 +30,8 @@ if ($category) {
 
     echo $this->paginationControl(
    					 $this->paginator,
-   					 'Sliding',
-   					 'pagination_control.phtml',
+   					 $this->config["pagination"]["paginationControl"]["ScrollingStyle"],
+   					 $this->config["pagination"]["paginationControl"]["tpl"],
    					  [
 					  	"route_name_page"=>"stream_".$this->locale,
                         "route_name_default"=>"stream_".$this->locale,

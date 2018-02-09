@@ -10,18 +10,30 @@ composer require masterflash-ru/stream
 //определение вначале файла
 use Stream\Controller\IndexController as Stream;
 
+....
+
 'streams'=>[
-			'news'=>[                         /*раздел ленты*/
-				'description'=>'Новости',        /*Имя ленты*/
-				'items_page'=>12,               /*кол-во элементов при просмотре анонсов*/
-			],
+          'news'=>[                                   /*раздел ленты*/
+              'description'=>'Новости',               /*Имя ленты*/
+              'items_page'=>12,                       /*кол-во элементов при просмотре анонсов*/
+              'pagination'=> [                        /*параметры вывода страниц*/
+                   'paginationControl'=> [
+                     'tpl'=>'pagination_control.phtml', /*шаблон вывода номеров страниц, по умолчанию внутренний*/
+                     'ScrollingStyle'=> 'Sliding',      /*стиль прокрутки номеров, допускается All, Elastic, Jumping, Sliding - по умолчанию*/
+                    ],
+              ],
+             'tpl' => [
+                 'index' => 'stream/index/index',     /*шаблон вывода списка статей*/
+                 'detal' => 'stream/index/detal',     /*шаблон вывода подробностей статьи*/
+             ],
+          ],
 
-			'itogi'=>[
-				'description'=>'Итоги',
-				'items_page'=>10,
-			], 
+          'itogi'=>[
+              'description'=>'Итоги',
+              'items_page'=>10,
+          ], 
 
-	],
+],
 ```
 Для хранения изображений используется masterflash-ru/storage, поэтому в конфиг приложения нужно добавить фрагмент, аналогичный данному:
 ```php
@@ -96,40 +108,40 @@ use Stream\Controller\IndexController as Stream;
 ```
 Добавьте в конфиг приложения маршрут:
 ```php
-			//маршрут для подробности
-			'stream_detal_ru_RU' => [
-					'type' => Segment::class,
-					'options' => [
-						'route'    => '/:stream/:url',
-						'constraints' => [
-											 'url' => '[a-zA-Z0-9_\-]+',
-											 'stream' => 'news|articles',
-										 ],
-						'defaults' => [
-							'controller' => Stream::class,
-							'action'     => 'detal',
-							'locale'=>'ru_RU'
-						],
-					],
-			],				
-			
-            //список новостей
-			'stream_ru_RU' => [
-                'type' => Segment::class,
+        //маршрут для подробности
+        'stream_detal_ru_RU' => [
+             'type' => Segment::class,
+             'options' => [
+                  'route'    => '/:stream/:url',
+                  'constraints' => [
+                        'url' => '[a-zA-Z0-9_\-]+',
+                         'stream' => 'news|articles',
+                  ],
+                 'defaults' => [
+                     'controller' => Stream::class,
+                     'action'     => 'detal',
+                     'locale'=>'ru_RU'
+                 ],
+            ],
+        ],
+
+        //список новостей
+        'stream_ru_RU' => [
+            'type' => Segment::class,
                 'options' => [
                     'route'    => '/:stream[/page/:page]',
-					'constraints' => [
-										 'stream' => 'news|articles',
-										 'page' => '\d+',
-                           			 ],
+                    'constraints' => [
+                          'stream' => 'news|articles',
+                          'page' => '\d+',
+                    ],
                     'defaults' => [
                         'controller' => Stream::class,
                         'action'     => 'index',
-						'page'=>1,
-						'locale'=>'ru_RU'
+                        'page'=>1,
+                        'locale'=>'ru_RU'
                     ],
                 ],
-			],
+         ],
 
 ```
-Компонент имеет 2 варианта вывода номеров страниц, в стиле bootstrap (по умолчанию), и в старом формате, файл pagination_control-old.phtml
+

@@ -206,18 +206,6 @@ public function GetDefaultLocale()
 }
 
 
-/*
-установить дефолтную минимальную конфигурацию, что бы не вылетало ошибок
-* /
-protected function setDefaultConfig()
-{
-	return [
-				'items_page'=>10,
-				'last_items_count'=>10,
-				'images_array'=>[]
-		];
-}*/
-
 
 }
 

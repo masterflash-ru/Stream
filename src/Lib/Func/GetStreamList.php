@@ -1,5 +1,5 @@
-Mf\<?php
-namespace Stream\Lib\Func;
+<?php
+namespace Mf\Stream\Lib\Func;
 use Exception;
 
 class GetStreamList

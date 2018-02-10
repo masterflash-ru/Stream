@@ -1,5 +1,5 @@
 <?php
-namespace Stream\Entity;
+namespace Mf\Stream\Entity;
 /*
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `locale` char(5) DEFAULT NULL,

@@ -1,5 +1,5 @@
-Mf\Mf\<?php
-namespace Stream\Lib\Func;
+<?php
+namespace Mf\Stream\Lib\Func;
 
 
 class InImgLib

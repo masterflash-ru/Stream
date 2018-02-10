@@ -3,11 +3,11 @@
 лента статей новостей
  */
 
-namespace Stream\Controller;
+namespace Mf\Stream\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Stream\Service\Stream;
+use Mf\Stream\Service\Stream;
 use Exception;
 
 class IndexController extends AbstractActionController

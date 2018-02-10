@@ -4,7 +4,7 @@
 
 */
 
-namespace Stream\View\Helper;
+namespace Mf\Stream\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Model\ViewModel;

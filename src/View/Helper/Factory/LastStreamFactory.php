@@ -1,12 +1,11 @@
 <?php
-namespace Stream\View\Helper\Factory;
+namespace Mf\Stream\View\Helper\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Stream\Service\Stream;
+use Mf\Stream\Service\Stream;
 
 /**
- * универсальная фабрика для меню
  * 
  */
 class LastStreamFactory implements FactoryInterface

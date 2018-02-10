@@ -1,10 +1,10 @@
 <?php
-namespace Stream\Controller\Factory;
+namespace Mf\Stream\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Stream\Service\Stream;
-use Stream\Controller\IndexController;
+use Mf\Stream\Service\Stream;
+use Mf\Stream\Controller\IndexController;
 
 /**
  * This is the factory for IndexController. Its purpose is to instantiate the

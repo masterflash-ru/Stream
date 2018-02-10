@@ -1,5 +1,5 @@
 <?php
-namespace Stream\Service;
+namespace Mf\Stream\Service;
 
 /*
 сервис обработки прерывания GetControllersInfoAdmin simba.admin

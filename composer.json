@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Stream\\": "src/"
+            "Mf\\Stream\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Stream\\": "src/"
+            "Mf\\Stream\\": "src/"
         }
     },
     "extra": {
@@ -35,7 +35,7 @@
         },
         "zf": {
             "component": "Stream",
-            "config-provider": "masterflash-ru\\Stream\\ConfigProvider"
+            "config-provider": "masterflash-ru\\Mf\\Stream\\ConfigProvider"
         }
     }
 }

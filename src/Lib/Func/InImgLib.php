@@ -1,4 +1,4 @@
-<?php
+Mf\Mf\<?php
 namespace Stream\Lib\Func;
 
 

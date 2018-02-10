@@ -8,7 +8,7 @@ composer require masterflash-ru/stream
 Добавьте в конфиг приложения:
 ```php
 //определение вначале файла
-use Stream\Controller\IndexController as Stream;
+use Mf\Stream\Controller\IndexController as Stream;
 
 ....
 
@@ -18,7 +18,7 @@ use Stream\Controller\IndexController as Stream;
               'items_page'=>12,                       /*ОБЯЗАТЕЛЬНО кол-во элементов при просмотре анонсов*/
               'pagination'=> [                        /*параметры вывода страниц, НЕОБЯЗАТЕЛЬНО, указаны параметры по умолчанию*/
                    'paginationControl'=> [
-                     'tpl'=>'pagination_control.phtml', /*шаблон вывода номеров страниц, по умолчанию внутренний*/
+                     'tpl'=>'control_default.phtml',  /*шаблон вывода номеров страниц, по умолчанию внутренний, можно control_bootstrap3*/
                      'ScrollingStyle'=> 'Sliding',      /*стиль прокрутки номеров, допускается All, Elastic, Jumping, Sliding - по умолчанию*/
                     ],
               ],

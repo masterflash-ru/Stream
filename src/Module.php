@@ -3,11 +3,11 @@
 работа с лентами новостей, статей.....
  */
 
-namespace Stream;
+namespace Mf\Stream;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container;
 use Zend\EventManager\Event;
-use Stream\Service\GetControllersInfo;
+use Mf\Stream\Service\GetControllersInfo;
 
 class Module
 {

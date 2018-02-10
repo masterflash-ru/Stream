@@ -1,8 +1,8 @@
 <?php
-namespace Stream\Service\Factory;
+namespace Mf\Stream\Service\Factory;
 
 use Interop\Container\ContainerInterface;
-use Stream\Service\GetControllersInfo;
+
 
 /*
 Фабрика 
@@ -21,7 +21,7 @@ public function __invoke(ContainerInterface $container, $requestedName, array $o
     {
        $Router=$container->get("Application")->getMvcEvent()->getRouter();
 	    $config = $container->get('Config');
-        return new GetControllersInfo($Router,$config,$options);
+        return new $requestedName($Router,$config,$options);
     }
 }
 

@@ -1,10 +1,10 @@
 <?php
-namespace Stream\Service;
+namespace Mf\Stream\Service;
 
 use Locale;
 use ADO\Service\RecordSet;
 use ADO\Service\Command;
-use Stream\Entity\Item;
+use Mf\Stream\Entity\Item;
 use Exception;
 
 

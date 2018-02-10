@@ -1,62 +1,13 @@
 <?php
 /**
 работа с лентами новостей, статей.....
-помимо всего создается помощник види для показа последних статей/новостей, по умолчанию ичпользуется встроеный шаблон вывода
-если нужен другой, создайте аналогичный с именем laststream.phtml и запишите в папку data/stream  
+подробности настройки в документации
 */
 
-namespace Stream;
+namespace Mf\Stream;
 
-use Zend\Router\Http\Segment;
-use Zend\Router\Http\Literal;
-/*
-для других языков создайте новые маршруты по аналогии с ru_RU 
-в имени маршрута обязательно должна стоять локаль
-*/
 return [
 
-	//маршруты как примеры
-    'router' => [
-        'routes' => [
-		
-           /* //список новостей
-			'stream_ru_RU' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route'    => '/:stream[/page/:page]',
-					'constraints' => [
-										 'stream' => 'news|article',
-										 'page' => '\d+',
-                           			 ],
-                    'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
-						'page'=>1,
-						'locale'=>'ru_RU'
-                    ],
-                ],
-			],
-			
-			//маршрут для подробности
-			'stream_detal_ru_RU' => [
-					'type' => Segment::class,
-					'options' => [
-						'route'    => '/:stream/:url',
-						'constraints' => [
-											 'url' => '[a-zA-Z0-9_\-]+',
-											 'stream' => 'news|article',
-										 ],
-						'defaults' => [
-							'controller' => Controller\IndexController::class,
-							'action'     => 'detal',
-							'locale'=>'ru_RU'
-						],
-					],
-			],*/				
-
-	    ],
-    ],
-	
 	//контроллеры
     'controllers' => [
         'factories' => [
@@ -82,23 +33,6 @@ return [
     ],
 
 
-	/*настройки потоков
-	*здесь пример - новости, по необходимости добавьте нужные параметры в такую же секцию в глобальном конфиге
-	*приложения
-	* /
-	'streams'=>[
-			'news'=>[
-				'description'=>'Новости',
-				'items_page'=>2,
-			],
-
-			'article'=>[
-				'description'=>'Статьи',
-				'items_page'=>10,
-			],
-
-	],*/
-	
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',

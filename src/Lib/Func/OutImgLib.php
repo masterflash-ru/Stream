@@ -1,5 +1,5 @@
 <?php
-namespace Stream\Lib\Func;
+namespace Mf\Stream\Lib\Func;
 
 
 class OutImgLib

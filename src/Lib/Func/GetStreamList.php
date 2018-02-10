@@ -1,4 +1,4 @@
-<?php
+Mf\<?php
 namespace Stream\Lib\Func;
 use Exception;
 

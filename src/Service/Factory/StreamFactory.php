@@ -1,9 +1,9 @@
 <?php
-namespace Stream\Service\Factory;
+namespace Mf\Stream\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Stream\Service\Stream;
+
 
 
 /**
@@ -18,7 +18,7 @@ public function __invoke(ContainerInterface $container, $requestedName, array $o
 		 $cache = $container->get('DefaultSystemCache');
 		 $config = $container->get('Config');
         
-        return new Stream($connection, $cache,$config);
+        return new $requestedName($connection, $cache,$config);
     }
 }
 

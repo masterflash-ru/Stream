@@ -20,7 +20,7 @@ class IndexController extends AbstractActionController
               'items_page'=>12,                       /*кол-во элементов при просмотре анонсов*/
               'pagination'=> [                        /*параметры вывода страниц*/
                    'paginationControl' => [
-					   'tpl' => 'pagination_control.phtml',                 /*шаблон вывода номеров страниц, по умолчанию внутренний*/
+					   'tpl' => 'control_default.phtml', /*шаблон вывода номеров страниц, по умолчанию внутренний*/
                        'ScrollingStyle' => 'Sliding', /*стиль прокрутки номеров, допускается All, Elastic, Jumping, Sliding - по умолчанию*/
                     ],
               ],

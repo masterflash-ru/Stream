@@ -15,40 +15,30 @@ use Zend\View\Model\ViewModel;
 class LastStream extends AbstractHelper 
 {
 	protected $StreamLib;
+	protected $_default=[
+		"locale"=>"ru_RU",			//имя локали
+		"items"=>3,                 //кол-во элементов в выводе последних статей
+		"tpl"=>"lastdefault",       //сценарий генерации HTML
+	];
 
 
 /*
 * собственног помощник, вызывается в view:
 * echo $this->laststream(...........);
 * возвращается последние статьи в виде HTML 
-* 
-* $stream_name - строка имени потока, например, news
-параметры-опции:
-* items - кол-во элементов, по умолчанию 3
-* locale - строка имени локали, по умолчанию ru_RU
 */
-public function __invoke($stream_name,array $options=null)// $item_count=3,$locale="ru_RU")
+public function __invoke($stream_name,array $options=[])
 {
-    if (isset($options["locale"])) {
-        $locale=$options["locale"];
-    }else {
-        $locale="ru_RU";
-    }
-   
-    if (isset($options["items"])) {
-        $items=(int)$options["items"];
-    }else {
-        $items=3;
-    }
+	$options=array_replace_recursive($this->_default,$options);
 
     
     $this->StreamLib->setStreamName($stream_name);
-	$this->StreamLib->setLocale($locale);
-	$items=$this->StreamLib->loadLastList($items);
+	$this->StreamLib->setLocale($options["locale"]);
+	$items=$this->StreamLib->loadLastList((int)$options["items"]);
 
 	$view=$this->getView();
-	$vm=new ViewModel(["items"=>$items,'locale'=>$locale]);
-	$vm->setTemplate("laststream");
+	$vm=new ViewModel(["items"=>$items,'locale'=>$options["locale"]]);
+	$vm->setTemplate($options["tpl"]);
 	
 	return $view->render($vm);
 }

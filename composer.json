@@ -34,7 +34,7 @@
             "dev-develop": "1.1-dev"
         },
         "zf": {
-            "component": "Stream",
+            "component": "Mf\\Stream",
             "config-provider": "masterflash-ru\\Mf\\Stream\\ConfigProvider"
         }
     }

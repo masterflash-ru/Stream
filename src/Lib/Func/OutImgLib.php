@@ -16,11 +16,11 @@ public function __invoke($obj,$infa,&$properties,$col_number,$pole_dop,$tab_name
 		throw new \Exception("Нет настроек конфигурации в секции 'storage' для: ".$pole_dop[1]);
 	}
 	///заменим в 0-м параметре имя секции для поля F32
-	$pr=unserialize($properties["properties"][$col_number]);
+	$pr=unserialize($properties["properties"]);
 	$pr[0]=$stream_name;
 	
 	
-$properties["properties"][$col_number]=serialize($pr);
+$properties["properties"]=serialize($pr);
 
 
 }

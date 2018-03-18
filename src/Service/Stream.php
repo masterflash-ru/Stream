@@ -73,7 +73,7 @@ public function LoadDetal($url)
         //пытаемся считать из кеша
         $result = false;
         $page= $this->cache->getItem($key, $result);
-        if (!$result)
+        if (!$result )
         {
             //промах кеша, создаем
 			$c=new Command();
@@ -91,6 +91,7 @@ public function LoadDetal($url)
 			$rs=new RecordSet();
 			$rs->CursorType =adOpenKeyset;
 			$rs->Open($c);
+            	if ($rs->EOF) {throw new  \Exception("Запись в не найдена");}
 			$page=$rs->FetchEntity(Item::class);
 
             //сохраним в кеш

@@ -37,7 +37,7 @@ public function __invoke($stream_name,array $options=[])
 	$items=$this->StreamLib->loadLastList((int)$options["items"]);
 
 	$view=$this->getView();
-	$vm=new ViewModel(["items"=>$items,'locale'=>$options["locale"]]);
+	$vm=new ViewModel(["items"=>$items,'options'=>$options]);
 	$vm->setTemplate($options["tpl"]);
 	
 	return $view->render($vm);

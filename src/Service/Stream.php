@@ -133,9 +133,47 @@ public function LoadLastList($limit=3)
 	return $items;
 	}
 
- 
- 
- 
+ /**
+ * получить список всех URL, дату модификации, для создания карты сайта
+ */
+ public function getMap()
+ {
+		$key="Stream_all_{$this->locale}";
+        //пытаемся считать из кеша
+        $result = false;
+        $items= $this->cache->getItem($key, $result);
+        if (!$result || true){
+            $rs=new RecordSet();
+            $rs->CursorType = adOpenKeyset;
+            $rs->open("select url,locale,category,lastmod from stream 
+								where 
+									locale='".$this->locale."' and 
+									url>'' and 
+									public =".self::PUBLIC."
+										order by date_public",$this->connection);
+            $items=$rs->FetchEntityAll(Item::class);
+			//сохраним в кеш
+			$this->cache->setItem($key, $items);
+			$this->cache->setTags($key,["Stream"]);
+		}
+	return $items;
+ }
+
+/*
+* получить максимальную дату модификации
+**/
+public function getMaxLastMod()
+{
+    $rs=new RecordSet();
+    $rs->open("select max(lastmod) as lastmod, count(*) as recordcount from stream 
+								where 
+									locale='".$this->locale."' and 
+									url>'' and 
+									public =".self::PUBLIC,$this->connection);
+    $items=$rs->FetchEntity(Item::class);
+return $items;
+}
+    
  
 /*мультиязычность разрешена?
 возвращает true|false

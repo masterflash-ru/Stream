@@ -115,6 +115,7 @@ CREATE TABLE `stream` (
   `keywords` char(255) DEFAULT NULL,
   `description` text,
   `counter` int(11) DEFAULT '0' COMMENT 'счетчик просмотров',
+  `lastmod` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `date_public` (`date_public`),
   KEY `url` (`url`),

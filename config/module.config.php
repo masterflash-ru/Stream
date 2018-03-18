@@ -17,8 +17,9 @@ return [
 
 	 'service_manager' => [
 			  'factories' => [//сервисы-фабрики
-				   Service\GetControllersInfo::class => Service\Factory\GetControllersInfoFactory::class,
-				   Service\Stream::class => Service\Factory\StreamFactory::class,
+                  Service\GetControllersInfo::class => Service\Factory\GetControllersInfoFactory::class,
+                  Service\GetMap::class => Service\Factory\GetMapFactory::class,
+                  Service\Stream::class => Service\Factory\StreamFactory::class,
 			  ],
 	  ],
 

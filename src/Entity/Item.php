@@ -35,6 +35,7 @@ class Item
 	protected $keywords;
 	protected $description; 
 	protected $counter;
+    protected $lastmod;
 
 
 
@@ -186,6 +187,16 @@ public function setCounter($counter)
 public function getCounter()
 {
 	return $this->counter;
+}
+
+    public function setLastmod($lastmod)
+{
+	$this->lastmod=$lastmod;
+}
+
+public function getLastmod()
+{
+	return $this->lastmod;
 }
 
 }

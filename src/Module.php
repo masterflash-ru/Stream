@@ -5,25 +5,28 @@
 
 namespace Mf\Stream;
 use Zend\Mvc\MvcEvent;
-use Zend\Session\Container;
 use Zend\EventManager\Event;
 use Mf\Stream\Service\GetControllersInfo;
+use Mf\Stream\Service\GetMap;
 
 class Module
 {
+    protected $ServiceManager;
 
 public function getConfig()
     {
-		
 		return include __DIR__ . '/../config/module.config.php';
 	}
 
 public function onBootstrap(MvcEvent $event)
 {
+    $this->ServiceManager=$event->getApplication()-> getServiceManager();
 	$eventManager = $event->getApplication()->getEventManager();
     $sharedEventManager = $eventManager->getSharedManager();
-    // объявление слушателя для проверки авторизации админа 
+    // объявление слушателя для получения списка MVC для генерации меню сайта 
 	$sharedEventManager->attach("simba.admin", "GetControllersInfoAdmin", [$this, 'GetControllersInfoAdmin']);
+    //слушатель для генерации карты сайта
+    $sharedEventManager->attach("simba.sitemap", "GetMap", [$this, 'GetMap']);
 }
 
 
@@ -43,4 +46,19 @@ public function GetControllersInfoAdmin(Event $event)
 	$service=$container->build(GetControllersInfo::class,["name"=>$name,"locale"=>$locale]);
 	return $service->GetDescriptors();
 }
+
+/**
+*обработчик события GetMap - получение карты сайта
+*/
+public function GetMap(Event $event)
+{
+    $type=$event->getParam("type",NULL);
+    $name=$event->getParam("name",NULL);
+    $locale=$event->getParam("locale",NULL);
+    //сервис который будет возвращать карту
+    $service=$this->ServiceManager->build(GetMap::class,["type"=>$type,"locale"=>$locale,"name"=>$name]);
+    return $service->GetMap();
 }
+
+}
+

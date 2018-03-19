@@ -40,10 +40,9 @@ container - объект с интерфейсом Interop\Container\ContainerIn
 public function GetControllersInfoAdmin(Event $event)
 {
 	$name=$event->getParam("name",NULL);
-	$container=$event->getParam("container",NULL);
 	$locale=$event->getParam("locale",NULL);
 	//сервис который будет возвращать
-	$service=$container->build(GetControllersInfo::class,["name"=>$name,"locale"=>$locale]);
+	$service=$this->ServiceManager->build(GetControllersInfo::class,compact("locale","name"));
 	return $service->GetDescriptors();
 }
 
@@ -56,7 +55,7 @@ public function GetMap(Event $event)
     $name=$event->getParam("name",NULL);
     $locale=$event->getParam("locale",NULL);
     //сервис который будет возвращать карту
-    $service=$this->ServiceManager->build(GetMap::class,["type"=>$type,"locale"=>$locale,"name"=>$name]);
+    $service=$this->ServiceManager->build(GetMap::class,compact("type","locale","name"));
     return $service->GetMap();
 }
 

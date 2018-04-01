@@ -47,8 +47,28 @@ class GetMap
                 /*если запрос не принадлежит этому модулю то выход*/
                 return [];
             }
-            $items=$this->streamService->getMap();
             $rez=[];
+            /*список категорий не пустых!*/
+            $categories=$this->streamService->getCategories();
+            foreach ($categories as $item){
+                //["category"=>имя_категории,"items"=>всего_кол-во_записей_в_ленте,"itemsCountPerPage"=>элементов_на_странице]
+                $rez[]=[
+                    "uri"=>$this->Router->assemble(["stream"=>$item["category"]], ['name' => 'stream_ru_RU']),
+                    "lastmod"=>$item["lastmod"],
+                    "changefreq"=>"weekly"
+                ];
+                //разбиение на страницы
+                for ($i=1; $i<=floor($item["items"]/$item["itemsCountPerPage"]) ; $i++){
+                    $rez[]=[
+                        "uri"=>$this->Router->assemble(["stream"=>$item["category"],"page"=>$i+1], ['name' => 'stream_ru_RU']),
+                        "lastmod"=>$item["lastmod"],
+                        "changefreq"=>"weekly"
+                    ];
+                }
+            }
+
+            /*список подробных статей*/
+            $items=$this->streamService->getMap();
             foreach ($items as $item){
                 $rez[]=[
                     "uri"=>$this->Router->assemble(["stream"=>$item->getCategory(),"url"=>$item->getUrl()], ['name' => 'stream_detal_ru_RU']),

@@ -133,6 +133,26 @@ public function LoadLastList($limit=3)
 	return $items;
 	}
 
+    
+/*
+* получить список досуптных не пустых разделов лент
+* возвращает массив элементов:
+* ["category"=>имя_категории,"items"=>всего_кол-во_записей_в_ленте,"itemsCountPerPage"=>элементов_на_странице,"lastmod"=>дата_модификации]
+**/
+public function getCategories()
+{
+    $rez=[];
+    foreach (array_keys($this->config["streams"]) as $category){
+        $rs=$this->connection->Execute("select count(*) as c,max(lastmod) as lastmod from stream where category='$category'");
+        $c=(int)$rs->Fields->Item["c"]->Value;
+        if ($c>0){
+            $items_in_page=$this->config["streams"][$category]["items_page"];
+            $rez[]=["category"=>$category,"items"=>$c,"itemsCountPerPage"=>$items_in_page,"lastmod"=>$rs->Fields->Item["lastmod"]->Value];
+        }
+    }
+    return $rez;
+}
+    
  /**
  * получить список всех URL, дату модификации, для создания карты сайта
  */
@@ -142,7 +162,7 @@ public function LoadLastList($limit=3)
         //пытаемся считать из кеша
         $result = false;
         $items= $this->cache->getItem($key, $result);
-        if (!$result || true){
+        if (!$result){
             $rs=new RecordSet();
             $rs->CursorType = adOpenKeyset;
             $rs->open("select url,locale,category,lastmod from stream 

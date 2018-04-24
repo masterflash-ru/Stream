@@ -23,7 +23,7 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream_detal', 'stream', 0, 'anons', '', 2, 5, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'anons', '', 3, 0, '', '', 'cols=100 rows=6', '3', '', 'anons', '', '', '', '', '', 'N;', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'full', '', 2, 7, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
-  ('stream_detal', 'stream', 0, 'full', '', 3, 0, '', ' [\"statpage\"][''media_folder'']', ',', '39', '', 'full', '', '', '', '', '', 'a:4:{i:0;s:0:\"\";i:1;s:0:\"\";i:2;s:7:\"default\";i:3;s:7:\"default\";}', '', 'N;', 0, 'N;'),
+  ('stream_detal', 'stream', 0, 'full', '', 3, 0, '', '[''public_media_folder'']', ',', '39', '', 'full', '', '', '', '', '', 'a:4:{i:0;s:0:\"\";i:1;s:0:\"\";i:2;s:7:\"default\";i:3;s:7:\"default\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'alt', '', 2, 9, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'alt', '', 3, 0, '', '', 'size=100', '2', '', 'alt', '', '', '', '', '', 'a:1:{i:0;s:4:\"Text\";}', '', 'N;', 0, 'N;'),
   ('stream_detal', 'stream', 0, 'public', '', 2, 10, '', '', '', '1', '', '', '', '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', 0, 'N;'),

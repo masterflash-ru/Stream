@@ -20,15 +20,15 @@ if ($this->pageCount){
 	if (isset($this->previous) && $this->previous>1) {
 			$pages_urls[]="<li class=\"page-item\"><a class=\"page-link\" href='".$this->url(array_merge(array("page"=>$this->previous),$this->url_parameters),$this->route_name_page)."'>&laquo;</a></li>";
 		}else {
-			$pages_urls[]="<li class=\"disabled page-item\"><a class=\"page-link\" href=\"".$this->url($this->url_parameters,$this->route_name_default)."\">&laquo;</a></li>";
+			$pages_urls[]="<li class=\"disabled page-item\"><a class=\"page-link\" href=\"".$this->url($this->route_name_default,$this->url_parameters)."\">&laquo;</a></li>";
 	}
 
 	//<!-- Нумерованные ссылки на страницы -->
 	foreach ($this->pagesInRange as $pageitem){
-		$url=$this->url(array_merge(array("page"=>$pageitem),$this->url_parameters),$this->route_name_page);
+		$url=$this->url($this->route_name_page,array_merge(array("page"=>$pageitem),$this->url_parameters));
 		if ($pageitem != $this->current){
 			if ($pageitem==1) {
-				$url=$this->url($this->url_parameters,$this->route_name_default);
+				$url=$this->url($this->route_name_default,$this->url_parameters);
 			}
 			$pages_urls[]="<li class=\"page-item\"><a class=\"page-link\" href=\"".$url."\">$pageitem</a></li>";
 		} else {
@@ -38,7 +38,7 @@ if ($this->pageCount){
 					 
 	//<!-- Ссылка на следующую страницу -->
 	if (isset($this->next)){
-			$pages_urls[]="<li><a class=\"page-link\" href=\"".$this->url(array_merge(array("page"=>$this->next),$this->url_parameters),$this->route_name_page)."\">&raquo;</a>";
+			$pages_urls[]="<li><a class=\"page-link\" href=\"".$this->url($this->route_name_page,array_merge(array("page"=>$this->next),$this->url_parameters))."\">&raquo;</a>";
 	} else {
 			$pages_urls[]="<li class=\"disabled page-item\"><a class=\"page-link\" href=\"#\">&raquo;</a></li>";
 	}

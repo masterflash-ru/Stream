@@ -4,8 +4,6 @@ namespace Mf\Stream\Service\Factory;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-
-
 /**
 фабрика
  */
@@ -17,8 +15,8 @@ public function __invoke(ContainerInterface $container, $requestedName, array $o
 		 $connection=$container->get('ADO\Connection');
 		 $cache = $container->get('DefaultSystemCache');
 		 $config = $container->get('Config');
-        
-        return new $requestedName($connection, $cache,$config);
+        $stream_config_item_default=$config["stream_config_item_default"];
+        return new $requestedName($connection, $cache,$config,$stream_config_item_default);
     }
 }
 

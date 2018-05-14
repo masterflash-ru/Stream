@@ -30,7 +30,7 @@ return [
         'aliases' => [
             'LastStream' => View\Helper\LastStream::class,
 			'laststream' => View\Helper\LastStream::class,
-        ],
+        ], 
     ],
 
 
@@ -39,4 +39,22 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    /*конфиг элемента ленты по умолчанию*/
+    'stream_config_item_default' =>[
+          'description'=>'',                      /*Имя ленты*/
+          'items_page'=>12,                       /*кол-во элементов при просмотре анонсов УСТАРЕЛО, перенесено в ItemCountPerPage*/
+          'pagination'=> [                        /*параметры вывода страниц*/
+              'paginationControl' => [
+                  'tpl' => 'control_default',     /*шаблон вывода номеров страниц, по умолчанию внутренний*/
+                  'ScrollingStyle' => 'Sliding',  /*стиль прокрутки номеров, допускается All, Elastic, Jumping, Sliding - по умолчанию*/
+              ],
+              'ItemCountPerPage' => 12,           /*кол-во элементов при просмотре анонсов*/
+          ],
+          'tpl' => [
+              'index' => 'stream/index/index',    /*шаблон вывода списка статей*/
+              'detal' => 'stream/index/detal',    /*шаблон вывода подробностей статьи*/
+          ],
+          'layout' => null,                       /*макет вывода, по умолчанию текущий*/
+      ],
+
 ];

@@ -1,6 +1,7 @@
 <?php
 $category="";
-
+$this->paginator->setItemCountPerPage ($this->config["pagination"]['ItemCountPerPage']);
+$this->paginator->setCurrentPageNumber($this->page);
 foreach ($this->paginator as $item)
 {
 	$date=$this->dateFormat(

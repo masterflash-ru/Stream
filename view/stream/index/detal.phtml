@@ -3,7 +3,6 @@ $item=$this->item;
 $this->headTitle($item->GetTitle());
 $this->headMeta()->appendName('keywords', $item->GetKeywords());
 $this->headMeta()->appendName('description', $item->GetDescription() );
-
 ?>
 <div class="article-entry">
 	<h1><?=$item->getCaption();?></h1>

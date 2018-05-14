@@ -6,8 +6,6 @@ use ADO\Service\RecordSet;
 use ADO\Service\Command;
 use Mf\Stream\Entity\Item;
 use Exception;
-
-
 use Zend\Paginator\Adapter;
 use Zend\Paginator\Paginator;
 
@@ -20,22 +18,23 @@ class Stream
 	
     protected $connection; 
     protected $cache;
-	protected $page=0;
-	protected $locale;
+    protected $locale;
 	protected $config;
 	protected $stream_name;
+    protected $config_item_stream_default=[];
+    protected $config_item_stream=[];
 	
-	protected $items_page=10;		//элементов на странице
-    
-    public function __construct($connection, $cache,$config) 
+
+    public function __construct($connection, $cache,$config,$config_item_stream_default) 
     {
+        if (empty($config["locale_default"])){
+            $config["locale_default"]="ru_RU";
+        }
         $this->connection = $connection;
         $this->cache = $cache;
 		$this->config=$config;
-		$this->page_type=self::PUBLIC;
 		$this->locale=$config["locale_default"];
-
-		//\Zend\Debug\Debug::dump($config['streams']);
+        $this->config_item_stream_default=$config_item_stream_default;
     }
 
 
@@ -44,20 +43,29 @@ class Stream
 */
 public function LoadList()
 {
-	$rs=new RecordSet();
-	$rs->CursorType =adOpenKeyset;
-	$rs->Open("select * from stream 
-		where 
-			category='".$this->stream_name."' and 
-			locale='".$this->locale."' and 
-			url>'' and 
-			public =".self::PUBLIC."
-				order by date_public desc",$this->connection);
-	
-	$items=$rs->FetchEntityAll(Item::class);
-	$paginator = new Paginator(new Adapter\ArrayAdapter($items));
-	$paginator->setItemCountPerPage($this->items_page); //кол-во новостей на странице
-	$paginator->setCurrentPageNumber($this->page);
+    //создаем ключ кеша
+    $key="Stream_list_{$this->stream_name}_{$this->locale}";
+    //пытаемся считать из кеша
+    $result = false;
+    $paginator= $this->cache->getItem($key, $result);
+    if (!$result ){
+        $rs=new RecordSet();
+        $rs->CursorType =adOpenKeyset;
+        $rs->Open("select * from stream 
+            where 
+                category='".$this->stream_name."' and 
+                locale='".$this->locale."' and 
+                url>'' and 
+                public =".self::PUBLIC."
+                    order by date_public desc",$this->connection);
+
+        $items=$rs->FetchEntityAll(Item::class);
+        $paginator = new Paginator(new Adapter\ArrayAdapter($items));
+        //сохраним в кеш
+        $this->cache->setItem($key, $paginator);
+        $this->cache->setTags($key,["Stream"]);
+    }
+
 	return $paginator;
 }
 
@@ -73,8 +81,7 @@ public function LoadDetal($url)
         //пытаемся считать из кеша
         $result = false;
         $page= $this->cache->getItem($key, $result);
-        if (!$result )
-        {
+        if (!$result ){
             //промах кеша, создаем
 			$c=new Command();
 			$c->NamedParameters=true;
@@ -138,6 +145,7 @@ public function LoadLastList($limit=3)
 * получить список досуптных не пустых разделов лент
 * возвращает массив элементов:
 * ["category"=>имя_категории,"items"=>всего_кол-во_записей_в_ленте,"itemsCountPerPage"=>элементов_на_странице,"lastmod"=>дата_модификации]
+* предназначен для генерации в карте sitemap списка ленты по страницам 
 **/
 public function getCategories()
 {
@@ -146,8 +154,23 @@ public function getCategories()
         $rs=$this->connection->Execute("select count(*) as c,max(lastmod) as lastmod from stream where category='$category'");
         $c=(int)$rs->Fields->Item["c"]->Value;
         if ($c>0){
-            $items_in_page=$this->config["streams"][$category]["items_page"];
-            $rez[]=["category"=>$category,"items"=>$c,"itemsCountPerPage"=>$items_in_page,"lastmod"=>$rs->Fields->Item["lastmod"]->Value];
+        
+            if (!isset($this->config["streams"][$category]['pagination']['ItemCountPerPage'])){
+                throw new  \Exception("Не указан параметр ['pagination']['ItemCountPerPage'] в конфиге ленты $category");
+            }
+            $items_in_page=$this->config["streams"][$category]['pagination']['ItemCountPerPage'];
+            
+            /*устаревший параметр пока читаем без предупреждения*/
+            if (!empty($this->config["streams"][$category]["items_page"])){
+                trigger_error('Параметр конфига "items_page" ленты устарел, он перенесен в "pagination" !!!', E_USER_DEPRECATED);
+            }
+            
+            $rez[]=[
+                "category"=>$category,
+                "items"=>$c,
+                "itemsCountPerPage"=>$items_in_page,
+                "lastmod"=>$rs->Fields->Item["lastmod"]->Value
+            ];
         }
     }
     return $rez;
@@ -213,53 +236,67 @@ public function isMultiLocale()
  /*устновить номер страницы списка*/
 public function SetPage($page)
 {
-	$this->page=(int)$page;
+    trigger_error('Метод SetPage($page) класса Mf\Stream\Service\Stream устарел, номер текущей страницы перенесен куда положено в view', E_USER_DEPRECATED);
 }
 
 /*прочитать тип страниц для считывания*/
 public function GetPage()
 {
-	return $this->page;
+    trigger_error('Метод GetPage($page) класса Mf\Stream\Service\Stream устарел, номер текущей страницы перенесен куда положено в view', E_USER_DEPRECATED);
+	return 0;
 }
 
 /*устновить имя ленты
-сразу читается его конфигурация из секции
+*сразу читается его конфигурация из секции и сливается с дефолтными настройками элемента, результат
+* запоминается и возвращается по запросу
 */
-public function SetStreamName($name)
+public function setStreamName($name)
 {
-	$this->stream_name=$name;
-	if (!array_key_exists($name,$this->config['streams'] )) {throw new Exception("Попытка установить не допустимую  ленту");}
-	if (isset($this->config['streams'][$name]['items_page'])) {$this->items_page=(int)$this->config['streams'][$name]['items_page'];}
+	if (!array_key_exists($name,$this->config['streams'] )) {
+        throw new Exception("Попытка установить не допустимую  ленту");
+    }
+    $this->stream_name=$name;
+    $this->config_item_stream=array_replace_recursive($this->config_item_stream_default,$this->config['streams'][$name]);
+}
+
+/*
+*получить конфиг элемента выбранной ленты
+возвращает массив
+*/
+public function getConfigStreamItem()
+{
+    if (empty($this->config_item_stream)){
+        throw new Exception("Перед вызовом getConfigStreamItem() установите имя ленты для работы методом setStreamName(\$name)");
+    }
+    return $this->config_item_stream;
 }
 
 /*прочитать имя ленты*/
-public function GetStreamName()
+public function getStreamName()
 {
 	return $this->stream_name;
 }
 
  
 //установка локали
-public function SetLocale($locale=NULL)
+public function setLocale($locale=NULL)
 {
-	if (!empty($locale)) 
-		{
-			//проверим на допустимость имени локали
-			if (!in_array($locale,$this->config["locale_enable_list"])) 
-				{
-					throw new Exception("Попытка установить не допустимую локаль");
-				}
-			$this->locale=$locale;
-		}
+	if (!empty($locale)) {
+        //проверим на допустимость имени локали
+        if (!in_array($locale,$this->config["locale_enable_list"])) {
+            throw new Exception("Попытка установить не допустимую локаль");
+        }
+        $this->locale=$locale;
+    }
 }
 
 //получить локали
-public function GetLocale()
+public function getLocale()
 	{
 		return $this->locale;
 	}
 //получить дефолтную локаль, которая указана в конфиге приложения
-public function GetDefaultLocale()
+public function getDefaultLocale()
 {
 	return $this->config["locale_default"];
 }

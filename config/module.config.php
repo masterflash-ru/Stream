@@ -49,6 +49,7 @@ return [
                   'ScrollingStyle' => 'Sliding',  /*стиль прокрутки номеров, допускается All, Elastic, Jumping, Sliding - по умолчанию*/
               ],
               'ItemCountPerPage' => 12,           /*кол-во элементов при просмотре анонсов*/
+              'PageRange' =>   10             /*кол-во ссылок для перехода на другие страницы списка*/
           ],
           'tpl' => [
               'index' => 'stream/index/index',    /*шаблон вывода списка статей*/

@@ -1,6 +1,7 @@
 <?php
 $category="";
 $this->paginator->setItemCountPerPage ($this->config["pagination"]['ItemCountPerPage']);
+$this->paginator->setPageRange ($this->config["pagination"]['PageRange']);
 $this->paginator->setCurrentPageNumber($this->page);
 foreach ($this->paginator as $item)
 {
@@ -27,7 +28,7 @@ foreach ($this->paginator as $item)
 		}
 //генерирует СЕО для имени $category
 if ($category) {
-    $this->seolist($category,"ru_RU");
+    $this->seolist($category,$this->locale);
 
     echo $this->paginationControl(
    					 $this->paginator,

@@ -15,7 +15,6 @@ use Mf\Stream\Controller\IndexController as Stream;
 'streams'=>[
           'news'=>[                                   /*раздел ленты*/
               'description'=>'Новости',               /*ОБЯЗАТЕЛЬНО Имя ленты*/
-              'items_page'=>12,                       /*Устарело, ПЕРЕД ОБНОВЛЕНИЕМ ИЗМЕНИТЕ КОНФИГУРАЦИЮ ПРИЛОЖЕНИЯ!*/
               'pagination'=> [                        /*параметры вывода страниц, НЕОБЯЗАТЕЛЬНО, указаны параметры по умолчанию*/
                    'paginationControl'=> [
                      'tpl'=>'control_default.phtml',  /*шаблон вывода номеров страниц, по умолчанию внутренний, можно control_bootstrap3*/

@@ -42,7 +42,6 @@ return [
     /*конфиг элемента ленты по умолчанию*/
     'stream_config_item_default' =>[
           'description'=>'',                      /*Имя ленты*/
-          'items_page'=>12,                       /*кол-во элементов при просмотре анонсов УСТАРЕЛО, перенесено в ItemCountPerPage*/
           'pagination'=> [                        /*параметры вывода страниц*/
               'paginationControl' => [
                   'tpl' => 'control_default',     /*шаблон вывода номеров страниц, по умолчанию внутренний*/

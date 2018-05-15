@@ -25,16 +25,16 @@ class Stream
     protected $config_item_stream=[];
 	
 
-    public function __construct($connection, $cache,$config,$config_item_stream_default) 
+    public function __construct($connection, $cache,$config) 
     {
         if (empty($config["locale_default"])){
             $config["locale_default"]="ru_RU";
         }
+        $this->config_item_stream_default=$config["stream_config_item_default"];
         $this->connection = $connection;
         $this->cache = $cache;
 		$this->config=$config;
 		$this->locale=$config["locale_default"];
-        $this->config_item_stream_default=$config_item_stream_default;
     }
 
 

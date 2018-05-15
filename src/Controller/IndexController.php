@@ -14,7 +14,6 @@ class IndexController extends AbstractActionController
 {
       protected $connection;
       protected $stream_service;
-      protected $config_default=[];
 
 public function __construct ($connection,$stream_service)
 {

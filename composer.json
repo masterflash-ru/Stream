@@ -16,7 +16,8 @@
         "zendframework/zend-paginator": "^2.7",
         "masterflash-ru/ado": "*",
         "masterflash-ru/storage": "*",
-        "masterflash-ru/seolist": "*"
+        "masterflash-ru/seolist": "*",
+        "masterflash-ru/navigation": "*"
     },
     "autoload": {
         "psr-4": {

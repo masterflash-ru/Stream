@@ -29,17 +29,15 @@ foreach ($this->paginator as $item)
 //генерирует СЕО для имени $category
 if ($category) {
     $this->seolist($category,$this->locale);
+echo $this->Pagination($this->paginator,[
+           $this->config["pagination"]["paginationControl"]["tpl"]=>[
+               "RouteNamePageStart" =>"stream_".$this->locale,
+               "RouteNamePages"=>"stream_".$this->locale,
+               "RouteValues"=>["stream"=>$item->getCategory()],
+               "ScrollingStyle"=>$this->config["pagination"]["paginationControl"]["ScrollingStyle"]
+           ]
+       ]);
 
-    echo $this->paginationControl(
-   					 $this->paginator,
-   					 $this->config["pagination"]["paginationControl"]["ScrollingStyle"],
-   					 $this->config["pagination"]["paginationControl"]["tpl"],
-   					  [
-					  	"route_name_page"=>"stream_".$this->locale,
-                        "route_name_default"=>"stream_".$this->locale,
-						"url_parameters"=>["stream"=>$item->getCategory()]
-                      ]
-        );
 }
 
 

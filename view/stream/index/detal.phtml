@@ -1,8 +1,19 @@
 <?php
-$item=$this->item;
+
 $this->headTitle($item->GetTitle());
 $this->headMeta()->appendName('keywords', $item->GetKeywords());
 $this->headMeta()->appendName('description', $item->GetDescription() );
+
+if ($this->getHelperPluginManager()->has("SearchIndex1")){
+    //поисковый индекс
+    $this->SearchIndex(
+        $tovars->getInfo(),
+        $tovars->getTitle(),
+        $this->url("tovar_detal",["category"=>$category->getUrl(),"url"=>$tovars->getUrl()]),
+        ["material_type"=>"Каталог товара"]
+    );
+}
+
 ?>
 <div class="article-entry">
 	<h1><?=$item->getCaption();?></h1>

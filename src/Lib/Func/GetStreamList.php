@@ -10,12 +10,12 @@ public function __invoke($obj,$infa,$struct_arr,$pole_type,$pole_dop,$tab_name,$
 {
 	//выводит список разделов ленты из константы конфигурации
 	
-	if (!isset($obj->config['streams']) || !is_array($obj->config['streams']))
+	if (!isset($obj->config['streams']["categories"]) || !is_array($obj->config['streams']["categories"]))
 		{
 			throw new Exception("Секция конфига 'streams' не найдена или она не верного формата");
 		}
 	
-	$l=$obj->config['streams'];// секция конфига                
+	$l=$obj->config['streams']["categories"];// секция конфига                
 	
 	$obj->dop_sql['name']=[];
 	$obj->dop_sql['id']=[];

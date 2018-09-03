@@ -1,6 +1,6 @@
 <?php
 /*
-помощник view для вывода из хранилища фото имени файла фото, готового для вставки в HTML
+помощник view для вывода последних статей/новостей из ленты
 
 */
 
@@ -8,6 +8,7 @@ namespace Mf\Stream\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Model\ViewModel;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * помощник - вывода последних новостей/статей
@@ -29,7 +30,7 @@ class LastStream extends AbstractHelper
 */
 public function __invoke($stream_name,array $options=[])
 {
-	$options=array_replace_recursive($this->_default,$options);
+	$options=ArrayUtils::merge($this->_default,$options);
 
     
     $this->StreamLib->setStreamName($stream_name);

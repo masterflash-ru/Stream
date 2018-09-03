@@ -1,28 +1,38 @@
 <?php
 
-$this->headTitle($item->GetTitle());
-$this->headMeta()->appendName('keywords', $item->GetKeywords());
-$this->headMeta()->appendName('description', $item->GetDescription() );
+$this->headTitle($this->item->GetTitle());
+$this->headMeta()->appendName('keywords', $this->item->GetKeywords());
+$this->headMeta()->appendName('description', $this->item->GetDescription() );
 
-if ($this->getHelperPluginManager()->has("SearchIndex1")){
+$seo=$this->item->getSeo_options();
+if (!empty($seo->getRobots())){
+    //запретить индексирование
+    $this->headMeta()->appendName('robots', $seo->getRobots() );
+}
+if (!empty($seo->getCanonical())){
+    //указать канонический адрес страницы
+    $this->headLink(['rel' => 'canonical', 'href' =>rtrim($this->ServerDefaultUri,"/")."/". $seo->getCanonical()]);
+}
+
+if ($this->getHelperPluginManager()->has("SearchIndex")){
     //поисковый индекс
     $this->SearchIndex(
-        $tovars->getInfo(),
-        $tovars->getTitle(),
-        $this->url("tovar_detal",["category"=>$category->getUrl(),"url"=>$tovars->getUrl()]),
-        ["material_type"=>"Каталог товара"]
+        $this->item->getFull(),
+        $this->item->getCaption(),
+        $this->url("stream_detal_".$this->locale,["stream"=>$this->item->getCategory(),"url"=>$this->item->getUrl()]),
+        ["material_type"=>$this->config["description"]]
     );
 }
 
 ?>
 <div class="article-entry">
-	<h1><?=$item->getCaption();?></h1>
+	<h1><?=$this->item->getCaption();?></h1>
 	<div class="entry-body1">
-	<?=$item->getFull();?>
+	<?=$this->item->getFull();?>
 	</div>
 </div>
 <script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
 <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,viber,whatsapp" data-counter=""></div>
 <br />
-<a href="<?=$this->url("stream_".$this->locale,["stream"=>$item->getCategory()]);?>">Перейти к списку</a>
+<a href="<?=$this->url("stream_".$this->locale,["stream"=>$this->item->getCategory()]);?>">Перейти к списку</a>

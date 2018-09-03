@@ -3,8 +3,8 @@ $category="";
 $this->paginator->setItemCountPerPage ($this->config["pagination"]['ItemCountPerPage']);
 $this->paginator->setPageRange ($this->config["pagination"]['PageRange']);
 $this->paginator->setCurrentPageNumber($this->page);
-foreach ($this->paginator as $item)
-{
+
+foreach ($this->paginator as $item){
 	$date=$this->dateFormat(
 						new DateTime($item->getDate_public()),
 						IntlDateFormatter::MEDIUM, // date
@@ -15,21 +15,22 @@ foreach ($this->paginator as $item)
 	$category=$item->getCategory();
 ?>
 <div class="news_item">
-	        <div class="news_anons">
-            <h2><?=$item->getCaption();?></h2>
-            <div class="news_date"><?=$date;?></div>
-            	<a href="<?=$url;?>"><img src="<?=$this->ImageStorage($category,$item->getId(),"anons");?>" alt="<?=$item->getAlt();?>"  class="news_title_foto" /></a>
-                <?=$item->getAnons();?>
-                <div class="readmore"><a href="<?=$url;?>">Читать полностью &rarr;</a></div>
-    	     </div>
-      <div class="clearfloat"></div>
+    <div class="news_anons">
+        <h2><?=$item->getCaption();?></h2>
+        <div class="news_date"><?=$date;?></div>
+        <a href="<?=$url;?>"><img src="<?=$this->ImageStorage($category,$item->getId(),"anons");?>" alt="<?=$this->escapeHtmlAttr($item->getAlt());?>"  class="news_title_foto" /></a>
+        <?=$item->getAnons();?>
+        <div class="readmore"><a href="<?=$url;?>">Читать полностью &rarr;</a></div>
+    </div>
+ <div class="clearfloat"></div>
 </div>
 <?php 
+   
 		}
 //генерирует СЕО для имени $category
 if ($category) {
     $this->seolist($category,$this->locale);
-echo $this->Pagination($this->paginator,[
+    echo $this->Pagination($this->paginator,[
            $this->config["pagination"]["paginationControl"]["tpl"]=>[
                "RouteNamePageStart" =>"stream_".$this->locale,
                "RouteNamePages"=>"stream_".$this->locale,
@@ -37,10 +38,7 @@ echo $this->Pagination($this->paginator,[
                "ScrollingStyle"=>$this->config["pagination"]["paginationControl"]["ScrollingStyle"]
            ]
        ]);
-
 }
 
 
 
-?>
-<div class="clearfloat"></div>

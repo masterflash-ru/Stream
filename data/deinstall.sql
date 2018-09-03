@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 delete from design_tables where table_name='stream';
-delete from design_tables_text_interfase where interface_name='stream';
+delete from design_tables_text_interfase where interface_name like 'stream%';
 
 DROP TABLE IF EXISTS `stream`;
 

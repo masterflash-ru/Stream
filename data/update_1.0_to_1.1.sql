@@ -67,7 +67,7 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream_detal', 'stream', 0, 'lastmod', '', 2, 12, '', NULL, '', '1', NULL, '', NULL, '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', NULL, 'N;'),
   ('stream_detal', 'stream', 0, 'lastmod', '', 3, NULL, '', NULL, ',', '26', NULL, 'lastmod', NULL, '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', NULL, 'N;');
 
-INSERT INTO `design_tables_text_interfase` (`language`, `table_type`, `interface_name`, `item_name`, `text`) VALUES 
+INSERT INTO `esign_tables_text_interfase` (`language`, `table_type`, `interface_name`, `item_name`, `text`) VALUES 
   ('ru_RU', 0, 'stream_detal', 'caption0', 'Подробности'),
   ('ru_RU', 0, 'stream_detal', 'caption_col_date_public', 'дата публикации'),
   ('ru_RU', 0, 'stream_detal', 'caption_col_full', 'Подробно'),
@@ -108,41 +108,18 @@ INSERT INTO `design_tables_text_interfase` (`language`, `table_type`, `interface
   ('ru_RU', 0, 'stream_detal', 'caption_col_seo_options', 'SEO опции'),
   ('ru_RU', 0, 'stream_detal', 'caption_col_lastmod', 'Дата модификации<br>для карты сайта');
 
-DROP TABLE IF EXISTS `stream`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 
-CREATE TABLE `stream` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `locale` char(5) DEFAULT NULL,
-  `owner` int(11) DEFAULT NULL COMMENT 'ID юзера-владельца',
-  `category` char(50) DEFAULT NULL,
-  `date_public` datetime DEFAULT '0000-00-00 00:00:00' COMMENT 'дата публикации',
-  `full` text COMMENT 'полностью новости',
-  `caption` char(255) NOT NULL COMMENT 'заголовок',
-  `alt` char(255) DEFAULT NULL COMMENT 'подпись на плашках, ALT',
-  `anons` text COMMENT 'анонс новости',
-  `url` char(255) DEFAULT NULL,
-  `public` int(11) DEFAULT NULL COMMENT '1- публиковать',
-  `title` char(254) DEFAULT NULL,
-  `keywords` char(255) DEFAULT NULL,
-  `description` text,
-  `counter` int(11) DEFAULT '0' COMMENT 'счетчик просмотров',
-  `lastmod` datetime DEFAULT NULL COMMENT 'дата в карту сайта',
-  `seo_options` varchar(2000) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `date_public` (`date_public`),
-  KEY `url` (`url`),
-  KEY `public` (`public`),
-  KEY `category` (`category`),
-  KEY `locale` (`locale`),
-  KEY `owner` (`owner`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='лента информации, новости, статьи';
+ALTER TABLE `stream` 
+ ADD `seo_options` varchar(2000) DEFAULT NULL COMMENT 'опции для сео',
+ ADD `lastmod` datetime DEFAULT NULL COMMENT 'дата в карту сайта'
+;
+
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping routines for database 'simba4'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

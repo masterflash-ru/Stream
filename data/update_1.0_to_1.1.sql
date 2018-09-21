@@ -67,7 +67,7 @@ INSERT INTO `design_tables` (`interface_name`, `table_name`, `table_type`, `col_
   ('stream_detal', 'stream', 0, 'lastmod', '', 2, 12, '', NULL, '', '1', NULL, '', NULL, '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', NULL, 'N;'),
   ('stream_detal', 'stream', 0, 'lastmod', '', 3, NULL, '', NULL, ',', '26', NULL, 'lastmod', NULL, '', '', '', '', 'a:2:{i:0;s:1:\"0\";i:1;s:1:\"0\";}', '', 'N;', NULL, 'N;');
 
-INSERT INTO `esign_tables_text_interfase` (`language`, `table_type`, `interface_name`, `item_name`, `text`) VALUES 
+INSERT INTO `design_tables_text_interfase` (`language`, `table_type`, `interface_name`, `item_name`, `text`) VALUES 
   ('ru_RU', 0, 'stream_detal', 'caption0', 'Подробности'),
   ('ru_RU', 0, 'stream_detal', 'caption_col_date_public', 'дата публикации'),
   ('ru_RU', 0, 'stream_detal', 'caption_col_full', 'Подробно'),

@@ -31,29 +31,27 @@ class GetControllersInfo
 		if ($this->options["name"]) {return [];}
 		if (empty($this->options["locale"])) {$this->options["locale"]=$this->config["locale_default"];}
 		//для сайта
-		if (!isset($this->config['streams']) || !is_array($this->config['streams']))
-			{
-				throw new Exception("Секция конфига 'streams' не найдена или она не верного формата");
-			}
+		if (!isset($this->config['streams']) || !is_array($this->config['streams'])){
+            throw new Exception("Секция конфига 'streams' не найдена или она не верного формата");
+        }
 		$info["stream"]["description"]="Лента информации";
 		$rez['name']=[];
 		$rez['url']=[];
 		$rez['mvc']=[];
 
-		foreach ($this->config['streams'] as $stream_name=>$stream_info)
-			{
-				$locale=$this->options["locale"];
-				
-				$url = $this->Router->assemble(["stream"=>$stream_name], ['name' => 'stream_'.$locale]);
-						$mvc=[
-								"route"=>"stream_".$locale,
-								'params'=>["stream"=>$stream_name]
-							];
-				if($locale==$this->config["locale_default"]) {$locale=" локаль по умолчанию - ".$this->config["locale_default"];}
-				$rez["name"][]=$stream_info['description']." - ".$locale;
-				$rez["mvc"][]= serialize($mvc);
-				$rez["url"][]=$url;
-			}
+		foreach ($this->config['streams']["categories"] as $stream_name=>$stream_info) {
+            $locale=$this->options["locale"];
+            
+            $url = $this->Router->assemble(["stream"=>$stream_name], ['name' => 'stream_'.$locale]);
+            $mvc=[
+                "route"=>"stream_".$locale,
+                'params'=>["stream"=>$stream_name]
+            ];
+            if($locale==$this->config["locale_default"]) {$locale=$this->config["locale_default"];}
+            $rez["name"][]=$stream_info['description']." - ".$locale;
+            $rez["mvc"][]= serialize($mvc);
+            $rez["url"][]=$url;
+        }
 		$info["stream"]["urls"]=$rez;
 		return $info;
 	}

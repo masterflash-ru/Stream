@@ -166,7 +166,7 @@ public function getCategories()
         if ($c>0){
         
             if (!isset($this->config["streams"]["categories"][$category]['pagination']['ItemCountPerPage'])){
-                throw new  \Exception("Не указан параметр ['pagination']['ItemCountPerPage'] в конфиге ленты $category");
+                $this->config["streams"]["categories"][$category]['pagination']['ItemCountPerPage']=10; 
             }
             $items_in_page=$this->config["streams"]["categories"][$category]['pagination']['ItemCountPerPage'];
             $rez[]=[

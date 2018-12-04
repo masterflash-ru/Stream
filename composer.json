@@ -14,7 +14,7 @@
         "php": "^7.0",
         "zendframework/zend-cache": "^2.7",
         "zendframework/zend-paginator": "^2.7",
-        "masterflash-ru/ado": "*",
+        "masterflash-ru/ado": "^2.0",
         "masterflash-ru/storage": "*",
         "masterflash-ru/seolist": "*",
         "masterflash-ru/navigation": "*"

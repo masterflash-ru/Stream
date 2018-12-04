@@ -69,5 +69,24 @@ return [
     
     /*Канонический адрес сайта*/
     "ServerDefaultUri"=>"http://".trim($_SERVER["SERVER_NAME"],"w."),
+    // Настройка кэша.
+    'caches' => [
+        'DefaultSystemCache' => [
+            'adapter' => [
+                'name'    => Filesystem::class,
+                'options' => [
+                    'cache_dir' => './data/cache',
+                    'ttl' => 60*60*2 
+                ],
+            ],
+            'plugins' => [
+                [
+                    'name' => Serializer::class,
+                    'options' => [
+                    ],
+                ],
+            ],
+        ],
+    ],
 
 ];

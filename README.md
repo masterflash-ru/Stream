@@ -149,5 +149,27 @@ use Mf\Stream\Controller\IndexController as Stream;
 echo $this->laststream('имя_ленты',[опции]);
 
 ```
+В конфиге приложения должны быть настройки кэша:
+```php
+
+    'caches' => [
+        'DefaultSystemCache' => [
+            'adapter' => [
+                'name'    => Filesystem::class,
+                'options' => [
+                    'cache_dir' => './data/cache',
+                    'ttl' => 60*60*2 
+                ],
+            ],
+            'plugins' => [
+                [
+                    'name' => Serializer::class,
+                    'options' => [
+                    ],
+                ],
+            ],
+        ],
+    ],
+```
 
 

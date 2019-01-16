@@ -36,6 +36,17 @@ public function __construct ($connection,$stream_service)
         $paginator=$this->stream_service->LoadList();      //список элементов
         
         $config=$this->stream_service->getConfigStreamItem();
+        
+        /*настроим пагинатор*/
+        $paginator->setItemCountPerPage ($config["pagination"]['ItemCountPerPage']);
+        $paginator->setPageRange ($config["pagination"]['PageRange']);
+        $paginator->setCurrentPageNumber($page);
+        
+        //проверим границы кол-ва страниц
+        if ($page>$paginator->count()){
+            throw new Exception("Номер текущей страницы больше общего количества страниц");
+        }
+        
         $view= new ViewModel([
             "paginator"=>$paginator, /*собственно данные*/
             "locale"=>$locale,       /*имя локали*/

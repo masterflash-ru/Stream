@@ -127,7 +127,7 @@ use Mf\Stream\Controller\IndexController as Stream;
                     'defaults' => [
                         'controller' => Stream::class,
                         'action'     => 'index',
-                        'page'=>1,
+                        'page'=>0,                /*<= обязательно 0 !!!!*/
                         'locale'=>'ru_RU'
                     ],
                 ],
@@ -149,7 +149,7 @@ use Mf\Stream\Controller\IndexController as Stream;
 echo $this->laststream('имя_ленты',[опции]);
 
 ```
-В конфиге приложения должны быть настройки кэша:
+В конфиге приложения должны быть настройки кэша с именем 'DefaultSystemCache':
 ```php
 
     'caches' => [

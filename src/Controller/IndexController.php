@@ -31,6 +31,13 @@ public function __construct ($connection,$stream_service)
     $locale=$this->params('locale',$this->stream_service->getDefaultLocale());
 
     try {
+        //проверим нижнюю границу номера страницы
+        if ($page==1){
+            throw new Exception("Указан номер страницы 1 в URL, это приводит к дубляжу.");
+        }
+        if (empty($page)){/*номер страницы не указан, значит это первая*/
+            $page=1;
+        }
         $this->stream_service->SetLocale($locale);         //новая локаль
         $this->stream_service->SetStreamName($stream);
         $paginator=$this->stream_service->LoadList();      //список элементов
@@ -42,7 +49,7 @@ public function __construct ($connection,$stream_service)
         $paginator->setPageRange ($config["pagination"]['PageRange']);
         $paginator->setCurrentPageNumber($page);
         
-        //проверим границы кол-ва страниц
+        //проверим верхнюю границу кол-ва страниц
         if ($page>$paginator->count()){
             throw new Exception("Номер текущей страницы больше общего количества страниц");
         }
@@ -58,7 +65,7 @@ public function __construct ($connection,$stream_service)
             $this->layout($config["layout"]);
         }
         return $view;
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         //любое исключение - 404
         $this->getResponse()->setStatusCode(404);
     }

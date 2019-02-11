@@ -16,7 +16,7 @@
         "zendframework/zend-paginator": "^2.7",
         "masterflash-ru/ado": "^2.0",
         "masterflash-ru/imglib": "*",
-        "masterflash-ru/storage": "*",
+        "masterflash-ru/storage": "^1.0",
         "masterflash-ru/seolist": "*",
         "masterflash-ru/navigation": "*"
     },

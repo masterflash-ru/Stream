@@ -68,7 +68,10 @@ return [
 
     ],
     
-    
+    "interface"=>[
+        "stream"=>__DIR__."/admin.stream.php",
+    ],
+
     /*Канонический адрес сайта*/
     "ServerDefaultUri"=>"http://".trim($_SERVER["SERVER_NAME"],"w."),
 

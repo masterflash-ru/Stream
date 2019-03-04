@@ -1,8 +1,12 @@
 <?php
 namespace Mf\Stream;
 
-use Admin\Service\GqGridColModelHelper;
+use Admin\Service\JqGrid\ColModelHelper;
 use Zend\Json\Expr;
+use Mf\Stream\Lib\Admin;
+
+/*адаптеры ввода-вывода данных*/
+use Admin\Service\JqGrid\Adapter;
 
 return [
         /*jqgrid - сетка*/
@@ -16,15 +20,15 @@ return [
             
             /*все что касается чтения в таблицу*/
             "read"=>[
-                "adapter"=>"db", /*SQL выборка*/
+                "adapter"=>Adapter\Db::class, /*адаптер - объект/сервис в терминологии фреймфорка (SQL выборка)*/
                 "options"=>[ 
-                    "sql"=>"select * from stream",
+                    "sql"=>"select stream.*, id as img from stream",
                     "PrimaryKey"=>"id",
                 ],
             ],
             /*все что касается записи*/
             "write"=>[
-                "adapter"=>"db", /*SQL выборка*/
+                "adapter"=>Adapter\Db::class, /*SQL выборка*/
                 "options"=>[ 
                     "sql"=>"select * from stream",
                     "PrimaryKey"=>"id",
@@ -59,33 +63,43 @@ return [
                 ],
                 "colModel" => [
 
-                    GqGridColModelHelper::text("caption",["label"=>"Заголовок","width"=>400]),
-                    GqGridColModelHelper::text("url",[
+                    ColModelHelper::text("caption",["label"=>"Заголовок","width"=>400]),
+                    ColModelHelper::text("url",[
                         "width"=>400,
                         "hidden"=>true,
                         "editrules"=>[
                             "edithidden"=>true,
                         ]
                     ]),
-                    GqGridColModelHelper::datetime("date_public",["label"=>"Дата публикации"]),
-                    GqGridColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
+                    ColModelHelper::datetime("date_public",["label"=>"Дата публикации"]),
+                    ColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
                     
                     
-                    //GqGridColModelHelper::text("category",["label"=>"Раздел","width"=>100,"editable" => false]),
-                    GqGridColModelHelper::select("category",
+                    ColModelHelper::select("category",
                                         ["label"=>"Раздел",
+                                         "hidden" =>true,
+                                         "editrules"=>[
+                                             "edithidden"=>true,
+                                         ],
                                          "editoptions"=>[
-                                             "load_value"=>"",
-                                             "value"=>["news"=>"Новости","articles"=>"Статьи"],/*значение выпадающего списка Фиксировано*/
-                                             //"dataUrl"=>"/adm/ddddd"
+                                             "load_value"=>Admin\getCategory::class,
+                                         ],
+                                        ]),
+
+                    ColModelHelper::select("category",
+                                        ["label"=>"Раздел",
+                                         "hidden" =>false,
+                                         "editable"=>false,
+                                         "editoptions"=>[
+                                             "load_value"=>Admin\getCategory::class,
                                          ],
                                         ]),
                     
-                    GqGridColModelHelper::ckeditor("full_news",["label"=>"Статья полностью"]),
-                  
+                    ColModelHelper::ckeditor("full",["label"=>"Статья полностью"]),
                     
+                    ColModelHelper::image("img",["label"=>"Фото","imageid"=>"id"]),
 
-                    GqGridColModelHelper::cellActions(),
+                ColModelHelper::cellActions(),
                     
                 
                 ],

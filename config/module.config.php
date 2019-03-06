@@ -7,6 +7,7 @@
 namespace Mf\Stream;
 use Zend\Cache\Storage\Plugin\Serializer;
 use Zend\Cache\Storage\Adapter\Filesystem;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
 
@@ -67,9 +68,18 @@ return [
           ],
 
     ],
-    
+    /*сетка для админки*/
     "interface"=>[
         "stream"=>__DIR__."/admin.stream.php",
+    ],
+    /*плагины для сетки JqGrid*/
+    "JqGridPlugin"=>[
+        'factories' => [
+            Service\Admin\JqGrid\Plugin\Images::class=>Service\Admin\JqGrid\Plugin\FactoryImages::class,
+        ],
+        'aliases' =>[
+            "streamimage"=>Service\Admin\JqGrid\Plugin\Images::class,
+        ],
     ],
 
     /*Канонический адрес сайта*/

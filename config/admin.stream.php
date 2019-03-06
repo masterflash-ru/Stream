@@ -20,23 +20,24 @@ return [
             
             /*все что касается чтения в таблицу*/
             "read"=>[
-                "adapter"=>Adapter\Db::class, /*адаптер - объект/сервис в терминологии фреймфорка (SQL выборка)*/
-                "options"=>[ 
+                "db"=>[//плагин выборки из базы
                     "sql"=>"select stream.*, id as img from stream",
                     "PrimaryKey"=>"id",
                 ],
             ],
             /*все что касается записи*/
             "write"=>[
-                "adapter"=>Adapter\Db::class, /*SQL выборка*/
-                "options"=>[ 
+                "cache" =>[
+                    "tags"=>["stream","Stream"],
+                    "keys"=>["stream","Stream"],
+                ],
+                "db"=>[ 
                     "sql"=>"select * from stream",
                     "PrimaryKey"=>"id",
                 ],
             ],
             /*внешний вид*/
             "layout"=>[
-                
                 "caption" => "Это заголовок грида",
                 "height" => "auto",
                 "width" => 1000,
@@ -69,8 +70,17 @@ return [
                         "hidden"=>true,
                         "editrules"=>[
                             "edithidden"=>true,
+                        ],
+                        "plugins"=>[
+                            "write"=>[
+                                "translit"=>[
+                                    "source"=>"caption"
+                                ],
+                            ],
                         ]
+
                     ]),
+                    
                     ColModelHelper::datetime("date_public",["label"=>"Дата публикации"]),
                     ColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
                     
@@ -97,7 +107,17 @@ return [
                     
                     ColModelHelper::ckeditor("full",["label"=>"Статья полностью"]),
                     
-                    ColModelHelper::image("img",["label"=>"Фото","imageid"=>"id"]),
+                    ColModelHelper::image("img",
+                                          ["label"=>"Фото",
+                                           "plugins"=>[
+                                               "read"=>[
+                                                   "streamimage" =>[
+                                                       "image_id"=>"id",                        //имя поля с ID
+                                                       "storage_item_rule_name"=>"admin_img"   //имя правила из хранилища
+                                                   ],
+                                               ],
+                                           ],
+                                          ]),
 
                 ColModelHelper::cellActions(),
                     

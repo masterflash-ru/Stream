@@ -76,9 +76,11 @@ return [
     "JqGridPlugin"=>[
         'factories' => [
             Service\Admin\JqGrid\Plugin\Images::class=>Service\Admin\JqGrid\Plugin\FactoryImages::class,
+            Service\Admin\JqGrid\Plugin\GetCategory::class=>Service\Admin\JqGrid\Plugin\FactoryGetCategory::class,
         ],
         'aliases' =>[
             "streamimage"=>Service\Admin\JqGrid\Plugin\Images::class,
+            "GetCategory" => Service\Admin\JqGrid\Plugin\GetCategory::class,
         ],
     ],
 

@@ -85,24 +85,17 @@ return [
                     ColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
                     
                     
-                    ColModelHelper::select("category",
-                                        ["label"=>"Раздел",
-                                         "hidden" =>true,
-                                         "editrules"=>[
-                                             "edithidden"=>true,
-                                         ],
-                                         "editoptions"=>[
-                                             "load_value"=>Admin\getCategory::class,
-                                         ],
-                                        ]),
 
                     ColModelHelper::select("category",
                                         ["label"=>"Раздел",
-                                         "hidden" =>false,
-                                         "editable"=>false,
+                                         "editable"=>true,
                                          "editoptions"=>[
-                                             "load_value"=>Admin\getCategory::class,
                                          ],
+                                         "plugins"=>[
+                                             "colModel"=>[
+                                                 "GetCategory"=>[]
+                                             ]
+                                         ]
                                         ]),
                     
                     ColModelHelper::ckeditor("full",["label"=>"Статья полностью"]),

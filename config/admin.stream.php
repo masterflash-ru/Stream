@@ -3,10 +3,8 @@ namespace Mf\Stream;
 
 use Admin\Service\JqGrid\ColModelHelper;
 use Zend\Json\Expr;
-use Mf\Stream\Lib\Admin;
 
-/*адаптеры ввода-вывода данных*/
-use Admin\Service\JqGrid\Adapter;
+
 
 return [
         /*jqgrid - сетка*/

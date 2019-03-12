@@ -45,9 +45,21 @@ return [
                 "sortorder" => "desc",
                 "viewrecords" => true,
                 "autoencode" => true,
+                //"autowidth"=>true,
                 "hidegrid" => false,
                 "toppager" => true,
-               // "multiselect" => true,
+                
+                /*дает доп строку в конце сетки, из данных туда можно ставить итоги какие-либо*/
+                "footerrow"=> true, 
+                "userDataOnFooter"=> true,
+               
+                // "multiselect" => true,
+                //"onSelectRow"=> new Expr("editRow"), //клик на строке вызов строчного редактора
+               // "serializeRowData"=>new Expr("function (Data){console.log(Data); return Data;}"),
+                
+                
+                
+                
                 "rownumbers" => false,
                 "navgrid" => [
                     "button" => [
@@ -106,6 +118,12 @@ return [
                                                        "image_id"=>"id",                        //имя поля с ID
                                                        "storage_item_rule_name"=>"admin_img"   //имя правила из хранилища
                                                    ],
+                                               ],
+                                               "write"=>[
+                                                   "streamimage" =>[
+                                                       "image_id"=>"id",                        //имя поля с ID
+                                                   ],
+
                                                ],
                                            ],
                                           ]),

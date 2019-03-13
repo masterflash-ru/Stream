@@ -12,8 +12,9 @@ class FactoryImages
 
 public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
 {
+    $connection=$container->get('DefaultSystemDb');
 	$ImagesLib=$container->get(ImagesLib::class);
-    return new $requestedName($ImagesLib);
+    return new $requestedName($ImagesLib,$connection);
 }
 }
 

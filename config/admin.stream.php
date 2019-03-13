@@ -23,8 +23,25 @@ return [
                     "PrimaryKey"=>"id",
                 ],
             ],
-            /*все что касается записи*/
-            "write"=>[
+            /*редактирование*/
+            "edit"=>[
+                "cache" =>[
+                    "tags"=>["stream","Stream"],
+                    "keys"=>["stream","Stream"],
+                ],
+                "db"=>[ 
+                    "sql"=>"select * from stream",
+                    "PrimaryKey"=>"id",
+                ],
+            ],
+            "add"=>[
+                "db"=>[ 
+                    "sql"=>"select * from stream",
+                    "PrimaryKey"=>"id",
+                ],
+            ],
+            //удаление записи
+            "del"=>[
                 "cache" =>[
                     "tags"=>["stream","Stream"],
                     "keys"=>["stream","Stream"],
@@ -82,7 +99,17 @@ return [
                             "edithidden"=>true,
                         ],
                         "plugins"=>[
-                            "write"=>[
+                            "edit"=>[
+                                "translit"=>[
+                                    "source"=>"caption"
+                                ],
+                            ],
+                            "edit"=>[
+                                "translit"=>[
+                                    "source"=>"caption"
+                                ],
+                            ],
+                            "add"=>[
                                 "translit"=>[
                                     "source"=>"caption"
                                 ],
@@ -102,7 +129,7 @@ return [
                                          "editoptions"=>[
                                          ],
                                          "plugins"=>[
-                                             "colModel"=>[
+                                             "colModel"=>[//плагин срабатывает при генерации сетки, вызывается в помощнике сетки
                                                  "GetCategory"=>[]
                                              ]
                                          ]
@@ -119,11 +146,21 @@ return [
                                                        "storage_item_rule_name"=>"admin_img"   //имя правила из хранилища
                                                    ],
                                                ],
-                                               "write"=>[
+                                               "edit"=>[
                                                    "streamimage" =>[
                                                        "image_id"=>"id",                        //имя поля с ID
                                                    ],
-
+                                               ],
+                                               "del"=>[
+                                                   "streamimage" =>[
+                                                       "image_id"=>"id",                        //имя поля с ID
+                                                   ],
+                                               ],
+                                               "add"=>[
+                                                   "streamimage" =>[
+                                                       "image_id"=>"id",                        //имя поля с ID
+                                                       "database_table_name"=>"stream"
+                                                   ],
                                                ],
                                            ],
                                           ]),

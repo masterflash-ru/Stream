@@ -7,7 +7,6 @@ use Admin\Service\JqGrid\Plugin\Images as AImages;
 
 class Images extends AImages
 {
-    
     protected $def_options =[
         "image_id"=>"id",                        //имя поля с ID
         "storage_item_name" => "",              //имя секции в хранилище
@@ -26,14 +25,33 @@ public function read($value,$index,$row)
 }
 
 /**
-* повторяет админский плагин, только подменивает имя хранилища
+* добвление новой записи, ID еще нет, выисляется следующий и под ним записывается в хранилище
 */
-public function write($value,$postParameters)
+public function add($value,$postParameters)
 {
     $this->options["storage_item_name"]=$postParameters["category"];
-    return parent::write($value,$postParameters);
+    return parent::add($value,$postParameters);
 }
 
+/**
+* повторяет админский плагин, только подменивает имя хранилища
+*/
+public function edit($value,$postParameters)
+{
+    $this->options["storage_item_name"]=$postParameters["category"];
+    return parent::edit($value,$postParameters);
+}
 
+/*
+* подменяет админский плагин, только меняет имя хранилища
+*/
+public function del(array $postParameters)
+{
+    //читаем что бы определить категорию
+    $id=(int)$postParameters["id"];
+    $rs=$this->connection->Execute("select category from stream where id={$id}");
+    $this->options["storage_item_name"]=$rs->Fields->Item["category"]->Value;
+    return parent::del($postParameters);
 
+}
 }

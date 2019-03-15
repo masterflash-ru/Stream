@@ -75,8 +75,6 @@ return [
                // "serializeRowData"=>new Expr("function (Data){console.log(Data); return Data;}"),
                 
                 
-                
-                
                 "rownumbers" => false,
                 "navgrid" => [
                     "button" => [
@@ -86,7 +84,6 @@ return [
                         "view" => false,
                         "cloneToTop" => true,
                         "search" => true,
-                        
                     ],
                 ],
                 "colModel" => [
@@ -164,7 +161,6 @@ return [
                                                ],
                                            ],
                                           ]),
-
                 ColModelHelper::cellActions(),
                     
                 

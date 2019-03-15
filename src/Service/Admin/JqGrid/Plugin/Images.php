@@ -27,7 +27,7 @@ public function read($value,$index,$row)
 /**
 * добвление новой записи, ID еще нет, выисляется следующий и под ним записывается в хранилище
 */
-public function add($value,$postParameters)
+public function add($value,&$postParameters)
 {
     $this->options["storage_item_name"]=$postParameters["category"];
     return parent::add($value,$postParameters);
@@ -36,8 +36,15 @@ public function add($value,$postParameters)
 /**
 * повторяет админский плагин, только подменивает имя хранилища
 */
-public function edit($value,$postParameters)
+public function edit($value,&$postParameters)
 {
+    //читаем категорию существующей записи, если она сменилась, нужно перенести в хранилище
+    $id=(int)$postParameters["id"];
+    $rs=$this->connection->Execute("select category from stream where id={$id}");
+    if ($rs->Fields->Item["category"]->Value!=$postParameters["category"]){
+        //переносим
+        $this->ImagesLib->renameImages($rs->Fields->Item["category"]->Value,$postParameters["category"],$id);
+    }
     $this->options["storage_item_name"]=$postParameters["category"];
     return parent::edit($value,$postParameters);
 }

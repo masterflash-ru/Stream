@@ -2,6 +2,7 @@
 namespace Mf\Stream;
 
 use Admin\Service\JqGrid\ColModelHelper;
+use Admin\Service\JqGrid\NavGridHelper;
 use Zend\Json\Expr;
 
 
@@ -77,14 +78,12 @@ return [
                 
                 "rownumbers" => false,
                 "navgrid" => [
-                    "button" => [
-                        "edit" => true,
-                        "add" => true,
-                        "del" => true, 
-                        "view" => false,
-                        "cloneToTop" => true,
-                        "search" => true,
-                    ],
+                    "button" => NavGridHelper::Button(),
+                    "editOptions"=>NavGridHelper::editOptions(),
+                    "addOptions"=>NavGridHelper::addOptions(),
+                    "delOptions"=>NavGridHelper::delOptions(),
+                    "viewOptions"=>NavGridHelper::viewOptions(),
+                    "searchOptions"=>NavGridHelper::searchOptions(),
                 ],
                 "colModel" => [
 

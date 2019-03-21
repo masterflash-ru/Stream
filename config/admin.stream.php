@@ -87,7 +87,7 @@ return [
                 ],
                 "colModel" => [
 
-                    ColModelHelper::text("caption",["label"=>"Заголовок","width"=>400]),
+                    ColModelHelper::text("caption",["label"=>"Заголовок","width"=>400,"editoptions" => ["size"=>120 ]]),
                     ColModelHelper::text("url",[
                         "width"=>400,
                         "hidden"=>true,
@@ -110,11 +110,11 @@ return [
                                     "source"=>"caption"
                                 ],
                             ],
-                        ]
-
+                        ],
+                       "editoptions" => ["size"=>120 ],
                     ]),
                     
-                    ColModelHelper::datetime("date_public",["label"=>"Дата публикации"]),
+                    ColModelHelper::datetime("date_public",["label"=>"Дата публикации","editoptions" => ["size"=>60 ]]),
                     ColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
                     
                     
@@ -160,6 +160,7 @@ return [
                                                ],
                                            ],
                                           ]),
+                ColModelHelper::seo("seo_options",["label"=>"Опции SEO"]),
                 ColModelHelper::cellActions(),
                     
                 

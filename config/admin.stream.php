@@ -13,8 +13,8 @@ return [
         "description"=>"Редактирование ленты статей/новостей",
         "options" => [
             "container" => "stream",
-            "caption" => "<h1>Это заголовок перед всем111</h1>",
-            "podval" => "Это информация в конце интерфейса111",
+            "caption" => "",
+            "podval" => "",
             
             
             /*все что касается чтения в таблицу*/
@@ -54,31 +54,29 @@ return [
             ],
             /*внешний вид*/
             "layout"=>[
-                "caption" => "Это заголовок грида",
+                "caption" => "Лента статей/новостей и аналогичной информации",
                 "height" => "auto",
-                "width" => 1000,
-                "rowNum" => 20,
-                "rowList" => [20,50,100],
+                //"width" => 1000,
+                "rowNum" => 10,
+                "rowList" => [10,20,50,100],
                 "sortname" => "date_public",
                 "sortorder" => "desc",
                 "viewrecords" => true,
-                "autoencode" => true,
-                //"autowidth"=>true,
+                "autoencode" => false,
                 "hidegrid" => false,
                 "toppager" => true,
                 
                 /*дает доп строку в конце сетки, из данных туда можно ставить итоги какие-либо*/
-                "footerrow"=> true, 
-                "userDataOnFooter"=> true,
+                //"footerrow"=> true, 
+                //"userDataOnFooter"=> true,
                
                 // "multiselect" => true,
                 //"onSelectRow"=> new Expr("editRow"), //клик на строке вызов строчного редактора
-               // "serializeRowData"=>new Expr("function (Data){console.log(Data); return Data;}"),
-                
+        
                 
                 "rownumbers" => false,
                 "navgrid" => [
-                    "button" => NavGridHelper::Button(),
+                    "button" => NavGridHelper::Button(["search"=>false]),
                     "editOptions"=>NavGridHelper::editOptions(),
                     "addOptions"=>NavGridHelper::addOptions(),
                     "delOptions"=>NavGridHelper::delOptions(),
@@ -117,10 +115,9 @@ return [
                     ColModelHelper::datetime("date_public",["label"=>"Дата публикации","editoptions" => ["size"=>60 ]]),
                     ColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
                     
-                    
-
                     ColModelHelper::select("category",
                                         ["label"=>"Раздел",
+                                         "width"=>75,
                                          "editable"=>true,
                                          "editoptions"=>[
                                          ],
@@ -131,7 +128,17 @@ return [
                                          ]
                                         ]),
                     
-                    ColModelHelper::ckeditor("full",["label"=>"Статья полностью"]),
+                    ColModelHelper::ckeditor("full",[
+                        "label"=>"Статья полностью",
+                        "plugins"=>[
+                            "edit"=>[
+                                "ClearContent"=>[],
+                            ],
+                            "add"=>[
+                                "ClearContent"=>[],
+                            ],
+                        ],
+                    ]),
                     
                     ColModelHelper::image("img",
                                           ["label"=>"Фото",
@@ -160,7 +167,23 @@ return [
                                                ],
                                            ],
                                           ]),
-                ColModelHelper::seo("seo_options",["label"=>"Опции SEO"]),
+                    
+                    ColModelHelper::textarea("title",["label"=>"TITLE","hidden"=>true,"editrules"=>["edithidden"=>true]]),
+                    ColModelHelper::textarea("keywords",["label"=>"KEYWORDS","hidden"=>true,"editrules"=>["edithidden"=>true]]),
+                    ColModelHelper::textarea("description",["label"=>"DESCRIPTION","hidden"=>true,"editrules"=>["edithidden"=>true]]),
+                    ColModelHelper::seo("seo_options",["label"=>"Опции SEO"]),
+                    ColModelHelper::text("lastmod",[
+                        "hidden"=>true,
+                        "plugins"=>[
+                            "edit"=>[
+                                "LastMod"=>[],
+                            ],
+                            "add"=>[
+                                "LastMod"=>[],
+                            ],
+                        ],
+                        ]),
+
                 ColModelHelper::cellActions(),
                     
                 

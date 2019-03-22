@@ -41,7 +41,7 @@ public function edit($value,&$postParameters)
     //читаем категорию существующей записи, если она сменилась, нужно перенести в хранилище
     $id=(int)$postParameters["id"];
     $rs=$this->connection->Execute("select category from stream where id={$id}");
-    if ($rs->Fields->Item["category"]->Value!=$postParameters["category"]){
+    if ($rs->Fields->Item["category"]->Value!=$postParameters["category"] && !$rs->EOF){
         //переносим
         $this->ImagesLib->renameImages($rs->Fields->Item["category"]->Value,$postParameters["category"],$id);
     }

@@ -111,7 +111,17 @@ return [
                         ],
                        "editoptions" => ["size"=>120 ],
                     ]),
-                    
+                    ColModelHelper::select("locale",
+                                        ["label"=>"Язык",
+                                         "editable"=>true,
+                                         "width"=>40,
+                                         "plugins"=>[
+                                             "colModel"=>[//плагин срабатывает при генерации сетки, вызывается в помощнике сетки
+                                                 "Locale"=>[]
+                                             ]
+                                         ]
+                                        ]),
+
                     ColModelHelper::datetime("date_public",["label"=>"Дата публикации","editoptions" => ["size"=>60 ]]),
                     ColModelHelper::checkbox("public",["label"=>"Публ","width"=>30]),
                     
@@ -127,7 +137,7 @@ return [
                                              ]
                                          ]
                                         ]),
-                    
+                    ColModelHelper::textarea("anons",["label"=>"Анонс","hidden"=>true,"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::ckeditor("full",[
                         "label"=>"Статья полностью",
                         "plugins"=>[
@@ -167,7 +177,7 @@ return [
                                                ],
                                            ],
                                           ]),
-                    
+                    ColModelHelper::text("alt",["label"=>"ALT подпись","hidden"=>true,"editoptions" => ["size"=>120 ],"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::textarea("title",["label"=>"TITLE","hidden"=>true,"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::textarea("keywords",["label"=>"KEYWORDS","hidden"=>true,"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::textarea("description",["label"=>"DESCRIPTION","hidden"=>true,"editrules"=>["edithidden"=>true]]),

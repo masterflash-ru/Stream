@@ -77,7 +77,7 @@ return [
                 "rownumbers" => false,
                 "navgrid" => [
                     "button" => NavGridHelper::Button(["search"=>false]),
-                    "editOptions"=>NavGridHelper::editOptions(),
+                    "editOptions"=>NavGridHelper::editOptions(["closeAfterEdit"=>false]),
                     "addOptions"=>NavGridHelper::addOptions(),
                     "delOptions"=>NavGridHelper::delOptions(),
                     "viewOptions"=>NavGridHelper::viewOptions(),

@@ -68,6 +68,13 @@ return [
           ],
 
     ],
+    /*доступ к панели управления*/
+    "permission"=>[
+        "objects" =>[
+            "interface/stream" => [1,1,0760],
+        ],
+    ],
+
     /*сетка для админки*/
     "interface"=>[
         "stream"=>__DIR__."/admin.stream.php",

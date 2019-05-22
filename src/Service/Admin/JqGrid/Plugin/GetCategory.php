@@ -21,7 +21,7 @@ class GetCategory extends AbstractPlugin
     * $colModel - элемент $colModel из конфигурации
     * возвращает тот же $colModel, с внесенными изменениями
     */
-    public function colModel(array $colModel)
+    public function colModel(array $colModel, array $toolbarData=[])
     {
 
         $config=$this->config['streams']["categories"];

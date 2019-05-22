@@ -47,8 +47,7 @@ class GetControllersInfo
                 "route"=>"stream_".$locale,
                 'params'=>["stream"=>$stream_name]
             ];
-            if($locale==$this->config["locale_default"]) {$locale=$this->config["locale_default"];}
-            $rez["name"][]=$stream_info['description']." - ".$locale;
+            $rez["name"][]=$stream_info['description']." (".$locale.")";
             $rez["mvc"][]= serialize($mvc);
             $rez["url"][]=$url;
         }

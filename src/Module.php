@@ -11,6 +11,7 @@ use Mf\Stream\Service\GetMap;
 
 class Module
 {
+    protected $ServiceManager; //устарело
 
 public function getConfig()
     {
@@ -19,7 +20,7 @@ public function getConfig()
 
 public function onBootstrap(MvcEvent $event)
 {
-    $ServiceManager=$event->getApplication()-> getServiceManager();
+    $this->ServiceManager=$ServiceManager=$event->getApplication()-> getServiceManager();
 	$eventManager = $event->getApplication()->getEventManager();
     $sharedEventManager = $eventManager->getSharedManager();
     //объявление слушателя для получения всех MVC адресов разбитых по языкам
@@ -28,9 +29,6 @@ public function onBootstrap(MvcEvent $event)
         $service=$ServiceManager->build(GetControllersInfo::class,["category"=>$category]);
         return $service->GetMvc();
     });
-
-    // Устарело объявление слушателя для получения списка MVC для генерации меню сайта 
-	$sharedEventManager->attach("simba.admin", "GetControllersInfoAdmin", [$this, 'GetControllersInfoAdmin']);
     //слушатель для генерации карты сайта
     $sharedEventManager->attach("simba.sitemap", "GetMap", function($event) use ($ServiceManager){
         $name=$event->getParam("name",NULL);
@@ -38,6 +36,9 @@ public function onBootstrap(MvcEvent $event)
         $service=$ServiceManager->build(GetMap::class,["name"=>$name,"locale"=>$locale]);
         return $service->GetDescriptors();
     });
+
+    // Устарело объявление слушателя для получения списка MVC для генерации меню сайта 
+	$sharedEventManager->attach("simba.admin", "GetControllersInfoAdmin", [$this, 'GetControllersInfoAdmin']);
 }
 
 

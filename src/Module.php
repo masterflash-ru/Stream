@@ -32,9 +32,10 @@ public function onBootstrap(MvcEvent $event)
     //слушатель для генерации карты сайта
     $sharedEventManager->attach("simba.sitemap", "GetMap", function($event) use ($ServiceManager){
         $name=$event->getParam("name",NULL);
+        $type=$event->getParam("type",NULL);
         $locale=$event->getParam("locale",NULL);
-        $service=$ServiceManager->build(GetMap::class,["name"=>$name,"locale"=>$locale]);
-        return $service->GetDescriptors();
+        $service=$ServiceManager->build(GetMap::class,["name"=>$name,"locale"=>$locale,"type"=>$type]);
+        return $service->GetMap();
     });
 
     // Устарело объявление слушателя для получения списка MVC для генерации меню сайта 

@@ -181,7 +181,7 @@ return [
                     ColModelHelper::textarea("title",["label"=>"TITLE","hidden"=>true,"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::textarea("keywords",["label"=>"KEYWORDS","hidden"=>true,"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::textarea("description",["label"=>"DESCRIPTION","hidden"=>true,"editrules"=>["edithidden"=>true]]),
-                    ColModelHelper::seo("seo_options",["label"=>"Опции SEO"]),
+                    ColModelHelper::seo("seo_options",["label"=>"Опции SEO","hidden"=>true,"editrules"=>["edithidden"=>true]]),
                     ColModelHelper::text("lastmod",[
                         "hidden"=>true,
                         "plugins"=>[

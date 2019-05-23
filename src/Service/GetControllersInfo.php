@@ -19,7 +19,10 @@ class GetControllersInfo
 	
     public function __construct($Router,$config,$options) 
     {
-		
+		if (empty($config["locale_enable_list"])){
+            $config["locale_enable_list"]=[$config["locale_default"]];
+        }
+
 		$this->Router=$Router;
 		$this->options=$options;
 		$this->config=$config;
@@ -30,6 +33,7 @@ class GetControllersInfo
     */
     public function getMvc()
     {
+        
 		//данный модуль содержит только сайтовские описатели описатели
 		if ($this->options["category"]!="frontend") {return [];}
 		//для сайта
@@ -40,23 +44,24 @@ class GetControllersInfo
 		$rez['name']=[];
 		$rez['url']=[];
 		$rez['mvc']=[];
-        //пока только для ru
-        $locale="ru_RU";
-		foreach ($this->config['streams']["categories"] as $stream_name=>$stream_info) {
-            try {
-                $url = $this->Router->assemble(["stream"=>$stream_name], ['name' => 'stream_'.$locale]);
-                $mvc=[
-                    "route"=>"stream_".$locale,
-                    'params'=>["stream"=>$stream_name]
-                ];
-                $rez["name"][$locale][]=$stream_info['description']." (".$locale.")";
-                $rez["mvc"][$locale][]= serialize($mvc);
-                $rez["url"][$locale][]=$url;
-            } catch (RuntimeException $e){
-                //если нет маршрута, тогда будет ошибка, просто пропускаем добавление для это локали
+
+        foreach ($this->config["locale_enable_list"] as $locale){
+            foreach ($this->config['streams']["categories"] as $stream_name=>$stream_info) {
+                try {
+                    $url = $this->Router->assemble(["stream"=>$stream_name], ['name' => 'stream_'.$locale]);
+                    $mvc=[
+                        "route"=>"stream_".$locale,
+                        'params'=>["stream"=>$stream_name]
+                    ];
+                    $rez["name"][$locale][]=$stream_info['description']." (".$locale.")";
+                    $rez["mvc"][$locale][]= serialize($mvc);
+                    $rez["url"][$locale][]=$url;
+                } catch (RuntimeException $e){
+                    //если нет маршрута, тогда будет ошибка, просто пропускаем добавление для это локали
+                }
             }
+            $info["stream"]["urls"]=$rez;
         }
-		$info["stream"]["urls"]=$rez;
 		return $info;
     }
     

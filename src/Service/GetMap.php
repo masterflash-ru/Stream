@@ -58,13 +58,13 @@ class GetMap
                     "changefreq"=>"weekly"
                 ];
                 //разбиение на страницы
-                /*for ($i=1; $i<=floor($item["items"]/$item["itemsCountPerPage"]) ; $i++){
+                for ($i=1; $i<=floor($item["items"]/$item["itemsCountPerPage"]) ; $i++){
                     $rez[]=[
                         "uri"=>$this->Router->assemble(["stream"=>$item["category"],"page"=>$i+1], ['name' => 'stream_ru_RU']),
                         "lastmod"=>$item["lastmod"],
                         "changefreq"=>"weekly"
                     ];
-                }*/
+                }
             }
 
             /*список подробных статей*/

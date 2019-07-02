@@ -30,6 +30,9 @@ class Stream
         if (empty($config["locale_default"])){
             $config["locale_default"]="ru_RU";
         }
+        if (empty($config["locale_enable_list"])){
+            $config["locale_enable_list"]=[$config["locale_default"]];
+        }
         $this->connection = $connection;
         $this->cache = $cache;
 		$this->config=$config;

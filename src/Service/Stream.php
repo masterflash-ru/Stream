@@ -164,7 +164,7 @@ public function getCategories()
 {
     $rez=[];
     foreach (array_keys($this->config["streams"]["categories"]) as $category){
-        $rs=$this->connection->Execute("select count(*) as c,max(lastmod) as lastmod from stream where category='$category'");
+        $rs=$this->connection->Execute("select count(*) as c,max(lastmod) as lastmod from stream where category='$category'  and public>0");
         $c=(int)$rs->Fields->Item["c"]->Value;
         if ($c>0){
         

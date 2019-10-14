@@ -171,5 +171,23 @@ echo $this->laststream('имя_ленты',[опции]);
         ],
     ],
 ```
+Для работы с базой в конфиге приложения должно быть объявлено DefaultSystemDb:
+```php
+......
+    "databases"=>[
+        //соединение с базой + имя драйвера
+        'DefaultSystemDb' => [
+            'driver'=>'MysqlPdo',
+            //"unix_socket"=>"/tmp/mysql.sock",
+            "host"=>"localhost",
+            'login'=>"root",
+            "password"=>"**********",
+            "database"=>"simba4",
+            "locale"=>"ru_RU",
+            "character"=>"utf8"
+        ],
+    ],
+.....
+```
 
 

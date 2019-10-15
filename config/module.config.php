@@ -9,12 +9,18 @@ use Zend\Cache\Storage\Plugin\Serializer;
 use Zend\Cache\Storage\Adapter\Filesystem;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
+if (empty($_SERVER["SERVER_NAME"])){
+    //скорей всего запустили из консоли
+    $_SERVER["SERVER_NAME"]="localhost";
+    $_SERVER["REQUEST_SCHEME"]="http";
+}
+
 return [
 
 	//контроллеры
     'controllers' => [
         'factories' => [
-			Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,	
+          Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,	
         ],
 	],
 

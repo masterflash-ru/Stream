@@ -249,7 +249,7 @@ public function setStreamName(string $name)
         throw new Exception("Попытка установить не допустимую  ленту");
     }
     $this->stream_name=$name;
-    $this->config_item_stream=ArrayUtils::merge($this->config['streams']["default"],$this->config['streams']["categories"][$name]);
+    $this->config_item_stream=$this->config['streams']["categories"][$name];
 }
 
 /*

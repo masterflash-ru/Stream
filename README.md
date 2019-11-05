@@ -13,6 +13,10 @@ use Mf\Stream\Controller\IndexController as Stream;
 ....
 
 'streams'=>[
+        "config"=>[                                       /*если имена базы и кеша отличны от значения по умолчанию:*/
+            "database"  =>  "DefaultSystemDb",            /*Имя базы данных с которой работаем*/
+            "cache"     =>  "DefaultSystemCache",         /*имя кеша с которым работаем*/
+        ],
         "categories"=>[
               'news'=>[                                   /*раздел ленты*/
                   'description'=>'Новости',               /*ОБЯЗАТЕЛЬНО Имя ленты*/

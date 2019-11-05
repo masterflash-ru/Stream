@@ -50,12 +50,14 @@ return [
     ],
     'streams'=>[
         "config"=>[
+            "database"  =>  "DefaultSystemDb",
+            "cache"     =>  "DefaultSystemCache",
             'status'=>[
                 0=>"Не опубликовано или на модерации",
                 1=>"Опубликовано",
             ],
         ],
-        /*конфиг элементов ленты
+        /*конфиг элементов ленты (ПРИМЕР)
         "categories"=>[
             'default' =>[                                 //ключ - системное имя ленты
                   'description'=>'',                      //Имя ленты 

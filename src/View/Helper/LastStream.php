@@ -6,9 +6,9 @@
 
 namespace Mf\Stream\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Model\ViewModel;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Model\ViewModel;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * помощник - вывода последних новостей/статей

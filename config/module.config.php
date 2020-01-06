@@ -5,9 +5,9 @@
 */
 
 namespace Mf\Stream;
-use Zend\Cache\Storage\Plugin\Serializer;
-use Zend\Cache\Storage\Adapter\Filesystem;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\Cache\Storage\Plugin\Serializer;
+use Laminas\Cache\Storage\Adapter\Filesystem;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 if (empty($_SERVER["SERVER_NAME"])){
     //скорей всего запустили из консоли

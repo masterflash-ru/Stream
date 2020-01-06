@@ -7,9 +7,9 @@ use ADO\Service\Command;
 use Mf\Stream\Entity\Item;
 use Mf\Stream\Entity\SeoOptions;
 use Exception;
-use Zend\Paginator\Adapter;
-use Zend\Paginator\Paginator;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Paginator\Adapter;
+use Laminas\Paginator\Paginator;
+use Laminas\Stdlib\ArrayUtils;
 
 
 class Stream 

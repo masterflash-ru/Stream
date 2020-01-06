@@ -2,7 +2,7 @@
 namespace Mf\Stream\Service\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
 фабрика

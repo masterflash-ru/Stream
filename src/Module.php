@@ -4,8 +4,8 @@
  */
 
 namespace Mf\Stream;
-use Zend\Mvc\MvcEvent;
-use Zend\EventManager\Event;
+use Laminas\Mvc\MvcEvent;
+use Laminas\EventManager\Event;
 use Mf\Stream\Service\GetControllersInfo;
 use Mf\Stream\Service\GetMap;
 

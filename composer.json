@@ -5,16 +5,16 @@
     "license": "BSD-3-Clause",
     "keywords": [
         "masterflash",
-        "zendframework"
+        "laminas"
     ],
-    "homepage": "https://masterflash.ru/",
+    "homepage": "https://www.masterflash.ru/",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.0",
-        "zendframework/zend-cache": "^2.7",
-        "zendframework/zend-paginator": "^2.7",
-        "masterflash-ru/ado": "^2.0",
+        "php": "^7.2",
+        "laminas/laminas-cache": "^2.7",
+        "laminas/laminas-paginator": "^2.7",
+        "masterflash-ru/ado": "^2.2",
         "masterflash-ru/imglib": "*",
         "masterflash-ru/storage": "^1.0",
         "masterflash-ru/seolist": "*",

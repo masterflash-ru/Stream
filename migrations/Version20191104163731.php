@@ -4,59 +4,58 @@ namespace Mf\Stream;
 
 use Mf\Migrations\AbstractMigration;
 use Mf\Migrations\MigrationInterface;
+use Laminas\Db\Sql\Ddl;
 
 class Version20191104163731 extends AbstractMigration implements MigrationInterface
 {
-    public static $description = "Migration description";
-
-    public function up($schema)
+    public static $description = "Migration for streams";
+    public function up($schema,$adapter)
     {
-        switch ($this->db_type){
-            case "mysql":{
-                $this->addSql("CREATE TABLE `stream` (
-                  `id` int(11) NOT NULL AUTO_INCREMENT,
-                  `locale` char(5) DEFAULT NULL,
-                  `owner` int(11) DEFAULT NULL COMMENT 'ID юзера-владельца',
-                  `category` char(50) DEFAULT NULL,
-                  `date_public` datetime DEFAULT '0000-00-00 00:00:00' COMMENT 'дата публикации',
-                  `full` text COMMENT 'полностью новости',
-                  `caption` char(255) NOT NULL COMMENT 'заголовок',
-                  `alt` char(255) DEFAULT NULL COMMENT 'подпись на плашках, ALT',
-                  `anons` text COMMENT 'анонс новости',
-                  `url` char(255) DEFAULT NULL,
-                  `public` int(11) DEFAULT NULL COMMENT '1- публиковать',
-                  `title` char(254) DEFAULT NULL,
-                  `keywords` char(255) DEFAULT NULL,
-                  `description` text,
-                  `counter` int(11) DEFAULT '0' COMMENT 'счетчик просмотров',
-                  `lastmod` datetime DEFAULT NULL COMMENT 'дата в карту сайта',
-                  `seo_options` varchar(2000) DEFAULT NULL,
-                  PRIMARY KEY (`id`),
-                  KEY `date_public` (`date_public`),
-                  KEY `url` (`url`),
-                  KEY `public` (`public`),
-                  KEY `category` (`category`),
-                  KEY `locale` (`locale`),
-                  KEY `owner` (`owner`)
-                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='лента информации, новости, статьи'");
-                break;
-            }
-            default:{
-                throw new \Exception("the database {$this->db_type} is not supported !");
-            }
-        }
+        $this->mysql_add_create_table=" ENGINE=MyIsam DEFAULT CHARSET=utf8";
+        $table = new Ddl\CreateTable("stream");
+        $table->addColumn(new Ddl\Column\Integer('id',false,null,["AUTO_INCREMENT"=>true]));
+        $table->addColumn(new Ddl\Column\Char('locale', 5,true,null,["COMMENT"=>"Локаль формата ru_RU","KEY"=>"locale"]));
+        $table->addColumn(new Ddl\Column\Integer('owner',true,null,["COMMENT"=>"ID юзера-владельца"]));
+        $table->addColumn(new Ddl\Column\Char('category', 50,true,null,["COMMENT"=>"Категория ленты"]));
+        $table->addColumn(new Ddl\Column\Datetime('date_public', true,null,["COMMENT"=>"дата публикации"]));
+        $table->addColumn(new Ddl\Column\Text('full', 0,true,null,["COMMENT"=>"контент страницы"]));
+        $table->addColumn(new Ddl\Column\Char('caption', 255,true,null,["COMMENT"=>"заголовок"]));
+        $table->addColumn(new Ddl\Column\Char('alt', 255,true,null,["COMMENT"=>"подпись фото"]));
+        $table->addColumn(new Ddl\Column\Text('anons', 0,true,null,["COMMENT"=>"анонс"]));
+        $table->addColumn(new Ddl\Column\Char('url', 255,true,null,["COMMENT"=>"URL"]));
+        $table->addColumn(new Ddl\Column\Integer('public',false,null));
+        $table->addColumn(new Ddl\Column\Integer('counter',true,null));
+        $table->addColumn(new Ddl\Column\Char('title', 255,true,null));
+        $table->addColumn(new Ddl\Column\Char('keywords', 255,true,null));
+        $table->addColumn(new Ddl\Column\Varchar('description', 3000,true,null));
+        $table->addColumn(new Ddl\Column\Datetime('lastmod', true,null,["COMMENT"=>"дата модификации"]));
+        $table->addColumn(new Ddl\Column\Varchar('seo_options', 2000,true,null,["COMMENT"=>"SEO опции"]));
+        
+        $table->addConstraint(
+            new Ddl\Constraint\PrimaryKey(['id'])
+        );
+        $table->addConstraint(
+            new Ddl\Constraint\UniqueKey(['url'])
+        );
+        $table->addConstraint(
+            new Ddl\Index\Index(['locale'],'locale')
+        );
+        $table->addConstraint(
+            new Ddl\Index\Index(['public'],'public')
+        );
+        $table->addConstraint(
+            new Ddl\Index\Index(['counter'],'counter')
+        );
+        $table->addConstraint(
+            new Ddl\Index\Index(['owner'],'owner')
+        );
+        $this->addSql($table);
     }
 
-    public function down($schema)
+    public function down($schema,$adapter)
     {
-        switch ($this->db_type){
-            case "mysql":{
-                $this->addSql("DROP TABLE `stream`");
-                break;
-            }
-            default:{
-                throw new \Exception("the database {$this->db_type} is not supported !");
-            }
-        }
+        $drop = new Ddl\DropTable('stream');
+        $this->addSql($drop);
     }
+
 }
